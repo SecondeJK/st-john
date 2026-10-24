@@ -1,0 +1,62 @@
+{{ define "main" }}
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $home := $cms.home -}}
+<section class="carousel" aria-roledescription="carousel" aria-label="Photos of St John's">
+  <div class="carousel__track">
+    {{- range $i, $s := $home.slides }}
+    <div class="carousel__slide{{ if eq $i 0 }} is-active{{ end }}" role="group" aria-roledescription="slide" aria-label="{{ add $i 1 }} of {{ len $home.slides }}"{{ if ne $i 0 }} aria-hidden="true"{{ end }}>
+      {{- partial "img.html" (dict "src" .src "alt" .alt "w" 1920 "h" 900 "eager" (eq $i 0)) }}
+    </div>
+    {{- end }}
+  </div>
+  <div class="carousel__caption">
+    <div class="container">
+      <h1>{{ $home.heading }}</h1>
+      <p>{{ $home.subheading }}</p>
+    </div>
+  </div>
+  <div class="carousel__controls">
+    <button class="carousel__btn" data-carousel="prev" aria-label="Previous photo">‹</button>
+    <div class="carousel__dots">
+      {{- range $i, $s := $home.slides }}
+      <button class="carousel__dot" data-carousel-to="{{ $i }}" aria-label="Show photo {{ add $i 1 }}"{{ if eq $i 0 }} aria-current="true"{{ end }}></button>
+      {{- end }}
+    </div>
+    <button class="carousel__btn" data-carousel="next" aria-label="Next photo">›</button>
+    <button class="carousel__btn carousel__pause" data-carousel="pause" aria-label="Pause slideshow">❚❚</button>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow intro">
+    <p class="lead">{{ $home.intro }}</p>
+  </div>
+  <div class="container card-grid">
+    {{- range $home.blocks }}
+    {{- partial "card.html" . }}
+    {{- end }}
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container two-col">
+    <div>
+      <h2>Coming up</h2>
+      {{- partial "event-list.html" (dict "events" (partialCached "events/data.html" "events") "limit" 5 "compact" true) }}
+      <a class="button" href="{{ "/whats-on/" | relURL }}">See what's on</a>
+    </div>
+    <div>
+      <h2>Latest news</h2>
+      <ul class="news-list">
+        {{- range first 3 (where site.RegularPages "Section" "blog") }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <span class="muted">{{ .Date.Format "2 January 2006" }}</span>
+        </li>
+        {{- end }}
+      </ul>
+      <a class="button button--outline" href="{{ "/blog/" | relURL }}">Read the blog</a>
+    </div>
+  </div>
+</section>
+{{ end }}

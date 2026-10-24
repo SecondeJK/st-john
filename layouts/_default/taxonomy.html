@@ -1,0 +1,15 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    {{- partial "breadcrumbs.html" . }}
+    <h1>Blog tags</h1>
+  </div>
+</section>
+<div class="section">
+  <ul class="container tag-chips">
+    {{- range .Data.Terms.ByCount }}
+    <li><a class="chip" href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span class="chip__count">{{ .Count }}</span></a></li>
+    {{- end }}
+  </ul>
+</div>
+{{ end }}

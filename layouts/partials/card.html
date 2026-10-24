@@ -1,0 +1,18 @@
+{{- /* Link card. Params: title, text, link, image, cta */ -}}
+{{- $external := not (hasPrefix .link "/") -}}
+<article class="card">
+  <a href="{{ .link }}" class="card__link"{{ if $external }} rel="noopener"{{ end }}>
+    <div class="card__media">
+      {{- with .image }}
+      {{- partial "img.html" (dict "src" . "alt" "" "w" 800 "h" 560 "sizes" "(min-width: 900px) 33vw, 100vw") }}
+      {{- else }}
+      <div class="card__placeholder" aria-hidden="true">✝</div>
+      {{- end }}
+    </div>
+    <div class="card__body">
+      <h3 class="card__title">{{ .title }}</h3>
+      {{- with .text }}<p>{{ . }}</p>{{ end }}
+      <span class="button button--small">{{ .cta | default "Discover more" }}{{ if $external }} <span aria-hidden="true">↗</span>{{ end }}</span>
+    </div>
+  </a>
+</article>

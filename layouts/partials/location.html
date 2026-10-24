@@ -1,0 +1,18 @@
+{{- /* Location and contact block. Context: CMS settings. */ -}}
+<section class="section" aria-labelledby="find-us">
+  <div class="container two-col">
+    <div>
+      <h2 id="find-us">Find us and get in touch</h2>
+      <address>{{ delimit .address "<br>" | safeHTML }}</address>
+      <p>
+        {{- with .phone }}Phone: {{ . }}<br>{{ end }}
+        {{- with .email }}Email: <a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+      </p>
+      <p><a class="button" href="{{ "/about/contact/" | relURL }}">Contact us</a></p>
+    </div>
+    <div class="map">
+      <iframe title="Map showing the church" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q={{ .mapQuery | urlquery }}&output=embed"></iframe>
+    </div>
+  </div>
+</section>

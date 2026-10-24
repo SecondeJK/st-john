@@ -1,0 +1,14 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    {{- partial "breadcrumbs.html" . }}
+    <h1>Posts tagged “{{ .Title }}”</h1>
+    <p class="page-hero__summary"><a href="{{ "/blog/" | relURL }}">← All posts</a></p>
+  </div>
+</section>
+<div class="section">
+  <div class="container post-grid">
+    {{- range .Pages.ByDate.Reverse }}{{ partial "post-card.html" . }}{{ end }}
+  </div>
+</div>
+{{ end }}

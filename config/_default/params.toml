@@ -1,0 +1,14 @@
+description = "St John the Baptist, Halesowen: a Norman parish church in the Halas Team Ministry, Diocese of Worcester."
+timeZone = "Europe/London"
+envBanner = false
+noindex = false
+
+# Where page, blog and settings content comes from: "fixtures" (data/fixtures) or "sanity".
+[cms]
+  source = "fixtures"
+  apiVersion = "2024-06-01"
+
+# Where events come from: "fixtures" (data/fixtures/events.json) or "google".
+[calendar]
+  source = "fixtures"
+  daysAhead = 180

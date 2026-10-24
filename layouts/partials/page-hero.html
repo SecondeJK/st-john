@@ -1,0 +1,11 @@
+{{- /* Title band for inner pages, with an optional CMS hero image behind it. */ -}}
+<section class="page-hero{{ if .Params.heroImage }} page-hero--image{{ end }}">
+  {{- with .Params.heroImage }}
+  {{- partial "img.html" (dict "src" . "alt" "" "w" 1920 "h" 560 "class" "page-hero__img" "eager" true) }}
+  {{- end }}
+  <div class="container page-hero__inner">
+    {{- partial "breadcrumbs.html" . }}
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.summary }}<p class="page-hero__summary">{{ . }}</p>{{ end }}
+  </div>
+</section>

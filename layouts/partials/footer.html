@@ -1,0 +1,33 @@
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $s := $cms.settings -}}
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h2 class="footer-title">Find us</h2>
+      <address>{{ delimit $s.address "<br>" | safeHTML }}</address>
+    </div>
+    <div>
+      <h2 class="footer-title">Contact</h2>
+      <p>
+        {{- with $s.phone }}Phone: {{ . }}<br>{{ end }}
+        {{- with $s.email }}Email: <a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+      </p>
+      <p><a href="{{ "/about/contact/" | relURL }}">Contact us</a></p>
+    </div>
+    <div>
+      <h2 class="footer-title">Sunday services</h2>
+      <ul class="plain-list">
+        {{- range $s.serviceTimes }}
+        <li><strong>{{ .day }} {{ .time }}</strong>, {{ .name }}</li>
+        {{- end }}
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-base">
+    {{- with resources.Get "images/cofe-logo-wide-white.png" }}
+    {{- $logo := .Resize "640x webp" }}
+    <img src="{{ $logo.RelPermalink }}" width="{{ div $logo.Width 2 }}" height="{{ div $logo.Height 2 }}" alt="Church of England" class="footer-logo">
+    {{- end }}
+    <p>Part of the Halas Team Ministry, Diocese of Worcester · © {{ now.Year }} St John the Baptist, Halesowen</p>
+  </div>
+</footer>

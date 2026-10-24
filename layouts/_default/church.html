@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- partial "page-hero.html" . }}
+<div class="section">
+  <div class="container two-col two-col--wide">
+    <div class="prose">{{ .Content }}</div>
+    <aside class="contact-card">
+      <h2>Service times</h2>
+      <ul class="plain-list">
+        {{- range $cms.settings.serviceTimes }}
+        <li><strong>{{ .day }} {{ .time }}</strong><br>{{ .name }}</li>
+        {{- end }}
+      </ul>
+      <a class="button button--small" href="{{ "/whats-on/" | relURL }}">Full calendar</a>
+    </aside>
+  </div>
+  {{- with .Params.gallery }}
+  <div class="container gallery">
+    {{- range . }}
+    <figure>
+      {{- partial "img.html" (dict "src" .src "alt" .alt "w" 600 "h" 600 "sizes" "(min-width: 900px) 25vw, 50vw") }}
+      {{- with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+    </figure>
+    {{- end }}
+  </div>
+  {{- end }}
+</div>
+{{- partial "location.html" $cms.settings }}
+{{ end }}

@@ -1,0 +1,380 @@
+# TEMPORARY TEST DATA for local development only.
+# In staging and production all of this comes from Sanity (see studio/).
+# Images are paths under assets/; in Sanity they are CDN URLs. Templates handle both.
+
+settings:
+  title: St John the Baptist, Halesowen
+  tagline: "Halesowen's parish church, here for worship, community and everyone"
+  address:
+    - St John the Baptist Church
+    - Church Lane
+    - Halesowen
+    - West Midlands
+  phone: "0121 000 0000 (test number)"
+  email: office@example.org
+  facebook: https://www.facebook.com/
+  mapQuery: St John the Baptist Church, Halesowen
+  serviceTimes:
+    - day: Sunday
+      time: "8:00am"
+      name: Holy Communion (said)
+    - day: Sunday
+      time: "10:30am"
+      name: Parish Eucharist with choir
+    - day: Wednesday
+      time: "10:00am"
+      name: Midweek Communion
+
+home:
+  heading: Welcome to St John the Baptist Church
+  subheading: Serving Halesowen for over 1000 years
+  intro: >-
+    A Grade I listed Norman church at the heart of Halesowen, and part of the Halas
+    Team Ministry in the Diocese of Worcester. Whoever you are, you are welcome here.
+  slides:
+    - src: images/st-john-tower.jpg
+      alt: The tower and spire of St John the Baptist Church
+    - src: images/st-john-nave.jpg
+      alt: Looking down the nave towards the altar
+    - src: images/st-john-profile.jpeg
+      alt: St John the Baptist Church seen from the churchyard
+  blocks:
+    - title: St John's Church
+      text: Visit our Norman church, with service times and how to find us.
+      link: /our-churches/st-johns/
+      image: images/st-john-font.jpeg
+    - title: Blog
+      text: News, music, heritage and stories from our church family.
+      link: /blog/
+      image: images/st-john-choir.jpeg
+    - title: About Us
+      text: Our history, our mission, and the people who serve the parish.
+      link: /about/
+      image: images/st-john-nave.jpg
+
+pages:
+  - path: about
+    title: About Us
+    layout: about
+    weight: 10
+    summary: Over nine centuries of worship at the heart of Halesowen.
+    heroImage: images/st-john-tower.jpg
+    body: |
+      St John the Baptist is a Grade I listed parish church in the Black Country town of
+      Halesowen. It is part of the Church of England, in the Diocese of Worcester, and for
+      over 900 years it has been at the centre of the town's religious and civic life. Its
+      160-foot spire rises out of the Stour valley and can be seen for miles around.
+
+      ## Our history
+
+      The church appears in the Domesday Book of 1086, which records that the manor of
+      *Halas* had "a church with two priests". This was probably a Saxon building. The
+      manor was held by Roger de Montgomery, Earl of Shrewsbury, who founded the oldest
+      parts of the church that stands today.
+
+      The Norman nave, arches and font date from the early twelfth century and are the
+      oldest parts of the building. In the early thirteenth century the church was given to
+      the newly founded Halesowen Abbey, and the Abbey appointed its clergy until the
+      Dissolution in 1538. In the Middle Ages St John's was the mother church of a parish
+      that covered much of what is now the Black Country.
+
+      The town grew with industry in the eighteenth and nineteenth centuries, and so did
+      the church. Richard Brindley Hone, vicar from 1836 to 1881, led a major restoration,
+      and the large outer south aisle was built in the 1880s.
+
+      ## The building
+
+      The church is cruciform, with a nave, chancel, aisles and a west tower. The tower was
+      begun around 1390 and finished in 1440. It has 114 steps to the parapet, and the
+      spire rises a further 72 feet above it. The tower holds a ring of eight bells. Two of
+      the 1707 bells are inscribed *Jesus be our speed* and *God bless the town of
+      Halesowen*.
+
+      Inside are memorials spanning many centuries, among them one to the poet and
+      landscape gardener William Shenstone (1714–1763), creator of The Leasowes, who is
+      buried in the churchyard.
+
+      *History adapted from the Wikipedia article
+      [St John the Baptist Church, Halesowen](https://en.wikipedia.org/wiki/St_John_the_Baptist_Church,_Halesowen),
+      available under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+      {.attribution}
+
+      ## Our mission
+
+      *Draft for the PCC to review.* We are a church family rooted in Halesowen for nine
+      centuries, seeking to know Jesus and make him known. We want to be a place of
+      worship, welcome and practical care, where people of every age and ability can
+      belong, grow in faith and serve our community.
+
+      ## Support for families
+
+      We want every family to feel at home here, including families of children and young
+      people with special educational needs and disabilities.
+      [Guiding Lights](/guiding-lights/) is our support group for SEN parents and carers.
+      Our [safeguarding](/safeguarding/) page explains how we keep everyone safe.
+
+  - path: about/staff
+    title: Staff and Leadership
+    layout: staff
+    weight: 11
+    summary: The clergy, officers and volunteers who serve St John's.
+    body: |
+      St John's is part of the Halas Team Ministry, which serves the parishes of Cradley,
+      Halesowen, Hasbury, Lapal and Romsley. Our clergy and lay leaders work across the
+      team. Get in touch with any of us through the [parish office](/about/contact/).
+
+  - path: about/contact
+    title: Contact Us
+    layout: contact
+    weight: 12
+    summary: Get in touch with the parish office, or come and find us.
+    body: |
+      For baptisms, weddings, funerals, hall hire or a pastoral visit, please contact the
+      parish office. We will get back to you as soon as we can.
+
+  - path: our-churches
+    title: Our Churches
+    layout: churches
+    weight: 20
+    summary: Five parish churches in the Halas Team Ministry.
+    body: |
+      St John the Baptist is one of five churches serving Halesowen and the surrounding
+      villages together as the Halas Team Ministry.
+
+  - path: our-churches/st-johns
+    title: St John the Baptist, Halesowen
+    layout: church
+    weight: 21
+    summary: Our Norman parish church in the centre of Halesowen.
+    heroImage: images/st-john-profile.jpeg
+    gallery:
+      - src: images/st-john-font.jpeg
+        alt: The Norman font
+        caption: The twelfth-century Norman font
+      - src: images/st-john-altar.jpg
+        alt: The high altar
+        caption: The sanctuary and high altar
+      - src: images/st-john-choir.jpeg
+        alt: The choir stalls
+        caption: The choir
+      - src: images/st-john-nave.jpg
+        alt: The nave
+        caption: The Norman nave
+    body: |
+      The church is in the centre of Halesowen, a short walk from the bus station and the
+      Cornbow shopping centre. It is open for services and when the Traidpoint Shop is
+      open, and at other times by arrangement.
+
+      ## Accessibility
+
+      There is step-free access by the south porch, and a hearing loop. Please ask a
+      sidesperson if you need any help.
+
+  - path: whats-on
+    title: What's On
+    layout: events
+    weight: 30
+    summary: Services, concerts, groups and events at St John's.
+    body: |
+      Everyone is welcome at our services and events. Click a date to see what's on, or
+      browse the full list below.
+
+  - path: blog
+    title: Blog
+    weight: 40
+    summary: News and stories from St John's.
+    body: ""
+
+  - path: safeguarding
+    title: Safeguarding
+    weight: 50
+    summary: How we keep children and adults at risk safe.
+    body: |
+      *This page is a placeholder. The parish safeguarding policy, the Parish Safeguarding
+      Officer's contact details and the Diocese of Worcester safeguarding team's details
+      will be added here.*
+
+      If anyone is in immediate danger, call **999**.
+
+      The Church of England's national safeguarding guidance is at
+      [churchofengland.org/safeguarding](https://www.churchofengland.org/safeguarding).
+
+  - path: traidpoint
+    title: Traidpoint Shop
+    weight: 60
+    summary: Our church and community shop in the north cloister.
+    heroImage: images/st-john-nave.jpg
+    body: |
+      Traidpoint has been in the church's north cloister since the 1980s. It started as a
+      church and community bookshop and now sells fairly traded goods, cards and gifts.
+
+      *Opening times, volunteering information and stock details to follow.*
+
+  - path: flower-guild
+    title: Flower Ladies' Guild
+    weight: 70
+    summary: The volunteers who keep St John's beautiful.
+    heroImage: images/st-john-altar.jpg
+    body: |
+      *This page is a placeholder.* The Flower Ladies' Guild arranges flowers for Sunday
+      services, festivals, weddings and funerals. New members are always welcome, and no
+      experience is needed.
+
+  - path: guiding-lights
+    title: Guiding Lights
+    weight: 80
+    summary: Friendship and support for parents and carers of children with SEN.
+    body: |
+      *This page is a placeholder.* Guiding Lights is a friendly group for parents and
+      carers of children and young people with special educational needs and disabilities
+      (SEND). Come for a cuppa, a chat and support from people who understand.
+
+      Details of meeting times, local SEND support services and how to join will be added
+      here.
+
+posts:
+  - slug: harvest-festival-thank-you
+    title: Thank you for a wonderful Harvest
+    publishedAt: "2026-10-05T12:00:00+01:00"
+    author: Parish Office
+    excerpt: Your harvest gifts filled the font and the chancel steps, and have gone to the Halesowen food bank.
+    tags: [News, Community, Worship]
+    media:
+      - type: image
+        src: images/st-john-altar.jpg
+        alt: The altar decorated for harvest
+        caption: The sanctuary on Harvest Sunday
+    body: |
+      Thank you to everyone who brought gifts for our Harvest Festival. Tins, packets and
+      fresh produce filled the chancel steps, and everything has now gone to the local food
+      bank.
+
+      Special thanks to the Flower Ladies' Guild for the beautiful arrangements.
+
+  - slug: choir-evensong-autumn
+    title: Choral Evensong returns this autumn
+    publishedAt: "2026-09-21T09:00:00+01:00"
+    author: Director of Music
+    excerpt: Our choir is restarting monthly Choral Evensong, and new singers are welcome.
+    tags: [Music, Choir, Worship]
+    media:
+      - type: image
+        src: images/st-john-choir.jpeg
+        alt: Choir stalls at St John's
+        caption: The choir stalls
+    body: |
+      From October the choir will sing Choral Evensong on the last Sunday of each month at
+      6pm. If you would like to sing with us, come along to a Thursday rehearsal. We would
+      especially love to hear from tenors and basses.
+
+  - slug: flower-festival-preview
+    title: A first look at our Flower Festival
+    publishedAt: "2026-09-02T10:00:00+01:00"
+    author: Flower Ladies' Guild
+    excerpt: A short video preview of the arrangements being prepared for this year's festival.
+    tags: [Community, Flower Guild]
+    media:
+      - type: video
+        src: https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4
+        poster: images/st-john-nave.jpg
+        alt: Video of a flower opening
+        caption: "Test video (CC0, from MDN)"
+    body: |
+      The Flower Ladies' Guild has been busy getting ready for this year's festival. Here is
+      a sneak preview. The full festival will fill the nave and cloisters.
+
+  - slug: norman-font-heritage
+    title: "Heritage corner: the Norman font"
+    publishedAt: "2026-08-14T10:00:00+01:00"
+    author: Heritage Team
+    excerpt: Our font is one of the oldest things in the church. Here is a closer look.
+    tags: [Heritage]
+    media:
+      - type: image
+        src: images/st-john-font.jpeg
+        alt: The Norman font
+        caption: The Norman font
+      - type: image
+        src: images/st-john-nave.jpg
+        alt: The Norman nave
+        caption: The nave, from the same period
+    body: |
+      Generations of Halesowen families have been baptised at our Norman font. Like the
+      nave arches, it dates from the early twelfth century and is among the oldest parts of
+      the building.
+
+  - slug: bell-ringers-wanted
+    title: Bell ringers wanted
+    publishedAt: "2026-07-30T10:00:00+01:00"
+    author: Tower Captain
+    excerpt: Learn to ring on our ring of eight. No experience needed.
+    tags: [Bells, Community]
+    media:
+      - type: image
+        src: images/st-john-tower.jpg
+        alt: The church tower
+        caption: Our tower, finished in 1440
+    body: |
+      Our tower has rung over Halesowen for centuries, and we would love more people to
+      learn. Practice night is Tuesday at 7:30pm. Just come to the tower door.
+
+  - slug: welcome-new-website
+    title: Welcome to our new website
+    publishedAt: "2026-07-01T10:00:00+01:00"
+    author: Parish Office
+    excerpt: A new home online for St John's, with events, news and more.
+    tags: [News]
+    media: []
+    body: |
+      Welcome to our new website! You'll find service times, a calendar of events and news
+      from across the parish. Let us know what you think.
+
+staff:
+  - name: Name to be confirmed
+    role: Team Rector
+    bio: Leads the Halas Team Ministry and is vicar of St John's.
+    email: rector@example.org
+    featured: true
+  - name: Name to be confirmed
+    role: Associate Priest
+    bio: Shares in leading worship and pastoral care across the team.
+    featured: true
+  - name: Name to be confirmed
+    role: Churchwarden
+    featured: true
+  - name: Name to be confirmed
+    role: Churchwarden
+    featured: true
+  - name: Name to be confirmed
+    role: Director of Music
+  - name: Name to be confirmed
+    role: Parish Safeguarding Officer
+    email: safeguarding@example.org
+  - name: Name to be confirmed
+    role: Parish Administrator
+    email: office@example.org
+
+# "link" is internal (starts with /) or a page on A Church Near You.
+# The external URLs below are search links to confirm before launch.
+churches:
+  - name: St John the Baptist
+    place: Halesowen
+    summary: Our Norman parish church in the town centre.
+    link: /our-churches/st-johns/
+    image: images/st-john-profile.jpeg
+  - name: St Peter's
+    place: Cradley
+    summary: Find service times and events on A Church Near You.
+    link: https://www.achurchnearyou.com/search/?text=St+Peter+Cradley
+  - name: St Peter's
+    place: Lapal
+    summary: Find service times and events on A Church Near You.
+    link: https://www.achurchnearyou.com/search/?text=St+Peter+Lapal
+  - name: St Margaret of Antioch
+    place: Hasbury
+    summary: Find service times and events on A Church Near You.
+    link: https://www.achurchnearyou.com/search/?text=St+Margaret+Hasbury
+  - name: St Kenelm's
+    place: Romsley
+    summary: Find service times and events on A Church Near You.
+    link: https://www.achurchnearyou.com/search/?text=St+Kenelm+Romsley

@@ -1,0 +1,37 @@
+{{- /*
+  Responsive image from either a local asset path ("images/x.jpg") or a Sanity CDN URL.
+  Params: src, alt, w, h (target crop), sizes, class, eager (bool)
+*/ -}}
+{{- $w := .w | default 1200 -}}
+{{- $h := .h | default 800 -}}
+{{- $sizes := .sizes | default "100vw" -}}
+{{- $src := "" -}}
+{{- $srcset := slice -}}
+{{- $widths := slice (div $w 2) $w -}}
+
+{{- if hasPrefix .src "http" -}}
+  {{- $base := .src -}}
+  {{- $sep := cond (strings.Contains $base "?") "&" "?" -}}
+  {{- $isSanity := strings.Contains $base "cdn.sanity.io" -}}
+  {{- range $widths -}}
+    {{- $u := $base -}}
+    {{- if $isSanity }}{{ $u = printf "%s%sw=%d&h=%d&fit=crop&auto=format" $base $sep . (div (mul . $h) $w) }}{{ end -}}
+    {{- $srcset = $srcset | append (printf "%s %dw" $u .) -}}
+    {{- $src = $u -}}
+  {{- end -}}
+{{- else -}}
+  {{- with resources.Get .src -}}
+    {{- $img := . -}}
+    {{- range $widths -}}
+      {{- $r := $img.Fill (printf "%dx%d webp q78 Smart" . (div (mul . $h) $w)) -}}
+      {{- $srcset = $srcset | append (printf "%s %dw" $r.RelPermalink .) -}}
+      {{- $src = $r.RelPermalink -}}
+    {{- end -}}
+  {{- else -}}
+    {{- warnf "img: asset not found: %s" .src -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $src -}}
+<img src="{{ . }}" srcset="{{ delimit $srcset ", " }}" sizes="{{ $sizes }}" width="{{ $w }}" height="{{ $h }}" alt="{{ $.alt }}"{{ with $.class }} class="{{ . }}"{{ end }}{{ if $.eager }} fetchpriority="high"{{ else }} loading="lazy"{{ end }} decoding="async">
+{{- end -}}

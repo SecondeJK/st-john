@@ -1,0 +1,12 @@
+{{ define "main" }}
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- partial "page-hero.html" . }}
+<div class="section">
+  <div class="container narrow prose">{{ .Content }}</div>
+  <div class="container card-grid">
+    {{- range $cms.churches }}
+    {{- partial "card.html" (dict "title" (printf "%s, %s" .name .place) "text" .summary "link" .link "image" .image "cta" (cond (hasPrefix .link "/") "Visit St John's" "A Church Near You")) }}
+    {{- end }}
+  </div>
+</div>
+{{ end }}

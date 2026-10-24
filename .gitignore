@@ -1,2 +1,18 @@
 .DS_Store
 .idea/
+
+# Hugo
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Environment files (commit only the example)
+.env
+.env.*
+!.env.example
+
+# Sanity Studio
+studio/node_modules/
+studio/dist/
+studio/.sanity/
+studio/.env

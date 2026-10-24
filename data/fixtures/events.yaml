@@ -1,0 +1,79 @@
+# TEMPORARY TEST EVENTS for local development only.
+# Staging and production read the Google Calendar set by HUGO_GCAL_ID.
+# Dates are relative to the build so the calendar always has upcoming events.
+
+# Repeat every week on the given weekday for `weeks` weeks.
+weekly:
+  - title: Holy Communion (said)
+    weekday: Sunday
+    time: "08:00"
+    minutes: 45
+    weeks: 16
+    location: St John's, Lady Chapel
+  - title: Parish Eucharist
+    weekday: Sunday
+    time: "10:30"
+    minutes: 75
+    weeks: 16
+    location: St John's
+    description: Sung Eucharist with the choir, followed by coffee.
+  - title: Bell ringing practice
+    weekday: Tuesday
+    time: "19:30"
+    minutes: 90
+    weeks: 16
+    location: St John's tower
+  - title: Midweek Communion
+    weekday: Wednesday
+    time: "10:00"
+    minutes: 40
+    weeks: 16
+    location: St John's
+  - title: Choir rehearsal
+    weekday: Thursday
+    time: "19:00"
+    minutes: 90
+    weeks: 16
+    location: St John's, choir stalls
+  - title: Traidpoint Shop open
+    weekday: Saturday
+    time: "10:00"
+    minutes: 180
+    weeks: 16
+    location: North cloister
+
+# One-off events, `days` after the build date.
+oneoff:
+  - title: Guiding Lights coffee morning
+    days: 4
+    time: "10:00"
+    minutes: 120
+    location: Church hall
+    description: Friendship and support for parents and carers of children with SEN.
+  - title: Flower Ladies' Guild meeting
+    days: 9
+    time: "14:00"
+    minutes: 90
+    location: Church hall
+  - title: Choral Evensong
+    days: 15
+    time: "18:00"
+    minutes: 60
+    location: St John's
+  - title: Organ recital
+    days: 22
+    time: "12:30"
+    minutes: 45
+    location: St John's
+    description: Lunchtime recital. Free entry, retiring collection.
+  - title: Christmas Fair
+    days: 35
+    time: "10:00"
+    minutes: 300
+    location: St John's and cloisters
+  - title: Carols by Candlelight
+    days: 52
+    time: "18:30"
+    minutes: 90
+    location: St John's
+    description: Our annual candlelit carol service, followed by mince pies.

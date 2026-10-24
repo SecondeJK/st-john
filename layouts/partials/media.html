@@ -1,0 +1,21 @@
+{{- /* One blog media attachment: { type: image|video|youtube, src, poster, id, alt, caption } */ -}}
+<figure class="media media--{{ .type }}">
+  {{- if eq .type "image" }}
+  {{- partial "img.html" (dict "src" .src "alt" .alt "w" 1200 "h" 800 "sizes" "(min-width: 800px) 760px, 100vw") }}
+  {{- else if eq .type "youtube" }}
+  <div class="media__frame">
+    <iframe src="https://www.youtube-nocookie.com/embed/{{ .id }}" title="{{ .alt | default .caption | default "Video" }}" loading="lazy"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  {{- else if eq .type "video" }}
+  {{- $poster := "" }}
+  {{- with .poster }}
+  {{- if hasPrefix . "http" }}{{ $poster = . }}{{ else }}{{ with resources.Get . }}{{ $poster = (.Fill "1200x675 webp q75 Smart").RelPermalink }}{{ end }}{{ end }}
+  {{- end }}
+  <video controls preload="metadata" playsinline{{ with $poster }} poster="{{ . }}"{{ end }} aria-label="{{ .alt }}">
+    <source src="{{ .src }}">
+    Your browser can't play this video. <a href="{{ .src }}">Download it</a>.
+  </video>
+  {{- end }}
+  {{- with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

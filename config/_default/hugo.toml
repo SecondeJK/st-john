@@ -1,0 +1,23 @@
+baseURL = "http://localhost:1313/"
+title = "St John the Baptist, Halesowen"
+languageCode = "en-gb"
+timeZone = "Europe/London"
+enableRobotsTXT = true
+
+[taxonomies]
+  tag = "tags"
+
+[imaging]
+  quality = 80
+  resampleFilter = "Lanczos"
+  anchor = "Smart"
+
+[security.funcs]
+  getenv = ['^HUGO_', '^CI$']
+
+[caches.getresource]
+  dir = ":cacheDir/:project"
+  maxAge = "10m"
+
+[markup.goldmark.parser.attribute]
+  block = true

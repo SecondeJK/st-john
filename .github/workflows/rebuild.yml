@@ -1,0 +1,19 @@
+# Rebuild the site nightly so the What's On page picks up Google Calendar changes.
+# Add a Netlify build hook URL as the NETLIFY_BUILD_HOOK repository secret.
+name: Nightly rebuild
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Netlify build
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "NETLIFY_BUILD_HOOK not set; skipping"; exit 0; fi
+          curl -fsS -X POST -d '{}' "$HOOK"

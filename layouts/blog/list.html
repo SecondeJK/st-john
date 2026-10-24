@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{- partial "page-hero.html" . }}
+{{- $posts := .RegularPages.ByDate.Reverse -}}
+<div class="section">
+  <div class="container">
+    <form class="blog-filters" data-blog-filters role="search" aria-label="Filter posts">
+      <label class="blog-filters__search">
+        <span class="visually-hidden">Search posts</span>
+        <input type="search" name="q" placeholder="Search posts…">
+      </label>
+      <label>
+        <span class="visually-hidden">Media</span>
+        <select name="media">
+          <option value="">All posts</option>
+          <option value="image">With photos</option>
+          <option value="video">With video</option>
+        </select>
+      </label>
+    </form>
+    <ul class="tag-chips" aria-label="Filter by tag">
+      <li><a href="{{ .RelPermalink }}" class="chip" data-tag="" aria-pressed="true">All</a></li>
+      {{- range site.Taxonomies.tags.ByCount }}
+      <li><a href="{{ .Page.RelPermalink }}" class="chip" data-tag="{{ .Page.Title }}" aria-pressed="false">{{ .Page.Title }} <span class="chip__count">{{ .Count }}</span></a></li>
+      {{- end }}
+    </ul>
+    <p class="blog-empty" data-blog-empty hidden>No posts match those filters.</p>
+    <div class="post-grid" data-blog-posts>
+      {{- range $posts }}{{ partial "post-card.html" . }}{{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,32 @@
+{{- /* Server-rendered event list grouped by month. Params: events, limit (optional), compact (bool) */ -}}
+{{- $events := .events -}}
+{{- with .limit }}{{ $events = first . $events }}{{ end -}}
+{{- $compact := .compact -}}
+{{- if not $events }}
+<p>No upcoming events. Please check back soon.</p>
+{{- else }}
+{{- $month := "" }}
+<ul class="event-list">
+  {{- range $events }}
+  {{- $m := .start.Format "January 2006" }}
+  {{- if and (not $compact) (ne $m $month) }}
+  <li class="event-month"><h3>{{ $m }}</h3></li>
+  {{- $month = $m }}
+  {{- end }}
+  <li class="event">
+    <time class="event__date" datetime="{{ .start.Format "2006-01-02T15:04:05Z07:00" }}">
+      <span class="event__day">{{ .start.Format "2" }}</span>
+      <span class="event__mon">{{ .start.Format "Jan" }}</span>
+    </time>
+    <div class="event__body">
+      <h4 class="event__title">{{ with .link }}<a href="{{ . }}" rel="noopener">{{ end }}{{ .title }}{{ if .link }}</a>{{ end }}</h4>
+      <p class="event__meta">
+        {{ .start.Format "Monday" }}{{ if not .allDay }}, {{ .start.Format "3:04pm" }} to {{ .end.Format "3:04pm" }}{{ end }}
+        {{- with .location }} · {{ . }}{{ end }}
+      </p>
+      {{- if and .description (not $compact) }}<p class="event__desc">{{ .description | truncate 200 }}</p>{{ end }}
+    </div>
+  </li>
+  {{- end }}
+</ul>
+{{- end }}

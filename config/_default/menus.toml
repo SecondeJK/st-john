@@ -1,0 +1,46 @@
+# Site taxonomy. Page content is managed in the CMS; the "Our Churches"
+# dropdown is built from the CMS church list.
+[[main]]
+  identifier = "about"
+  name = "About Us"
+  pageRef = "/about"
+  weight = 10
+[[main]]
+  parent = "about"
+  name = "Staff and Leadership"
+  pageRef = "/about/staff"
+  weight = 11
+[[main]]
+  parent = "about"
+  name = "Contact Us"
+  pageRef = "/about/contact"
+  weight = 12
+[[main]]
+  identifier = "our-churches"
+  name = "Our Churches"
+  pageRef = "/our-churches"
+  weight = 20
+[[main]]
+  name = "What's On"
+  pageRef = "/whats-on"
+  weight = 30
+[[main]]
+  name = "Blog"
+  pageRef = "/blog"
+  weight = 40
+[[main]]
+  name = "Safeguarding"
+  pageRef = "/safeguarding"
+  weight = 50
+[[main]]
+  name = "Traidpoint Shop"
+  pageRef = "/traidpoint"
+  weight = 60
+[[main]]
+  name = "Flower Ladies' Guild"
+  pageRef = "/flower-guild"
+  weight = 70
+[[main]]
+  name = "Guiding Lights"
+  pageRef = "/guiding-lights"
+  weight = 80

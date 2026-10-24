@@ -1,0 +1,9 @@
+{{ define "main" }}
+{{- partial "page-hero.html" . }}
+<div class="section">
+  <div class="container narrow prose">
+    {{ .Content }}
+  </div>
+  {{- partial "child-pages.html" . }}
+</div>
+{{ end }}

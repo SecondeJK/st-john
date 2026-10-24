@@ -1,0 +1,23 @@
+{{ define "main" }}
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- partial "page-hero.html" . }}
+<div class="section">
+  <div class="container narrow prose">
+    {{ .Content }}
+  </div>
+</div>
+
+<section class="section section--tint" aria-labelledby="leadership">
+  <div class="container">
+    <h2 id="leadership">Our vicar and leadership</h2>
+    <div class="people-grid">
+      {{- range where $cms.staff "featured" true }}
+      {{- partial "person.html" . }}
+      {{- end }}
+    </div>
+    <p><a class="button" href="{{ "/about/staff/" | relURL }}">Meet the whole team</a></p>
+  </div>
+</section>
+
+{{- partial "location.html" $cms.settings }}
+{{ end }}

@@ -1,0 +1,41 @@
+{{ define "main" }}
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- partial "page-hero.html" . }}
+<div class="section">
+  <div class="container two-col">
+    <div class="prose">
+      {{ .Content }}
+      <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="company">
+        <input type="hidden" name="form-name" value="contact">
+        <p class="visually-hidden"><label>Leave blank <input name="company" tabindex="-1" autocomplete="off"></label></p>
+        <label>Your name <input name="name" autocomplete="name" required></label>
+        <label>Email <input type="email" name="email" autocomplete="email" required></label>
+        <label>Subject
+          <select name="subject">
+            <option>General enquiry</option>
+            <option>Baptism</option>
+            <option>Wedding</option>
+            <option>Funeral</option>
+            <option>Pastoral visit</option>
+            <option>Hall hire</option>
+          </select>
+        </label>
+        <label>Message <textarea name="message" rows="6" required></textarea></label>
+        <button class="button" type="submit">Send message</button>
+      </form>
+    </div>
+    <aside class="contact-card">
+      <h2>Parish office</h2>
+      <address>{{ delimit $cms.settings.address "<br>" | safeHTML }}</address>
+      <p>
+        {{- with $cms.settings.phone }}Phone: {{ . }}<br>{{ end }}
+        {{- with $cms.settings.email }}Email: <a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+      </p>
+      <div class="map map--small">
+        <iframe title="Map showing the church" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q={{ $cms.settings.mapQuery | urlquery }}&output=embed"></iframe>
+      </div>
+    </aside>
+  </div>
+</div>
+{{ end }}

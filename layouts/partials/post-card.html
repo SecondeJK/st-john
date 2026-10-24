@@ -1,0 +1,24 @@
+{{- $media := slice -}}
+{{- range .Params.media }}{{ $media = $media | append (cond (eq .type "image") "image" "video") }}{{ end -}}
+{{- $cover := "" -}}
+{{- range .Params.media }}{{ if not $cover }}{{ $cover = cond (eq .type "image") .src (.poster | default "") }}{{ end }}{{ end -}}
+<article class="post-card" data-tags="{{ delimit (.Params.tags | default slice) "|" }}" data-media="{{ delimit ($media | uniq) " " }}" data-text="{{ printf "%s %s" .Title (.Params.excerpt | default "") | lower }}">
+  <a href="{{ .RelPermalink }}" class="post-card__link">
+    <div class="post-card__media">
+      {{- with $cover }}
+      {{- partial "img.html" (dict "src" . "alt" "" "w" 800 "h" 500 "sizes" "(min-width: 900px) 33vw, 100vw") }}
+      {{- else }}
+      <div class="card__placeholder" aria-hidden="true">✝</div>
+      {{- end }}
+      {{- if in $media "video" }}<span class="post-card__badge">▶ Video</span>{{ end }}
+    </div>
+    <div class="post-card__body">
+      <p class="muted"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time></p>
+      <h2 class="post-card__title">{{ .Title }}</h2>
+      {{- with .Params.excerpt }}<p>{{ . }}</p>{{ end }}
+    </div>
+  </a>
+  <ul class="post-card__tags">
+    {{- range .GetTerms "tags" }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
+  </ul>
+</article>

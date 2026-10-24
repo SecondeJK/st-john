@@ -1,0 +1,52 @@
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $current := . -}}
+<header class="site-header">
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span>{{ $cms.settings.tagline }}</span>
+      {{- with $cms.settings.facebook }}
+      <a href="{{ . }}" class="topbar__social" rel="noopener">Facebook</a>
+      {{- end }}
+    </div>
+  </div>
+  <div class="container masthead">
+    <a href="{{ "/" | relURL }}" class="brand">
+      {{- with resources.Get "images/cofe-logo-white.png" }}
+      {{- $logo := .Resize "360x webp" }}
+      <img src="{{ $logo.RelPermalink }}" width="{{ div $logo.Width 2 }}" height="{{ div $logo.Height 2 }}" alt="Church of England">
+      {{- end }}
+      <span class="brand__name">
+        <span class="brand__title">St John the Baptist</span>
+        <span class="brand__place">Halesowen</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bar"></span><span class="visually-hidden">Menu</span>
+    </button>
+  </div>
+  <nav id="site-nav" class="site-nav" aria-label="Main">
+    <ul class="container nav-list">
+      {{- range site.Menus.main }}
+      {{- $children := .Children -}}
+      {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) -}}
+      {{- with .Page }}{{ if or (eq $current .) ($current.IsDescendant .) }}{{ $active = true }}{{ end }}{{ end -}}
+      <li class="nav-item{{ if or $children (eq .Identifier "our-churches") }} has-children{{ end }}">
+        <a href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{- if eq .Identifier "our-churches" }}
+        <ul class="subnav">
+          {{- range $cms.churches }}
+          <li><a href="{{ .link }}"{{ if not (hasPrefix .link "/") }} rel="noopener"{{ end }}>{{ .name }}, {{ .place }}</a></li>
+          {{- end }}
+        </ul>
+        {{- else if $children }}
+        <ul class="subnav">
+          {{- range $children }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{- end }}
+        </ul>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ul>
+  </nav>
+</header>

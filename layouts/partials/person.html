@@ -1,0 +1,15 @@
+<article class="person">
+  <div class="person__photo">
+    {{- with .photo }}
+    {{- partial "img.html" (dict "src" . "alt" "" "w" 320 "h" 320 "sizes" "160px") }}
+    {{- else }}
+    <span aria-hidden="true">{{ substr .role 0 1 }}</span>
+    {{- end }}
+  </div>
+  <div>
+    <h3 class="person__name">{{ .name }}</h3>
+    <p class="person__role">{{ .role }}</p>
+    {{- with .bio }}<p>{{ . }}</p>{{ end }}
+    {{- with .email }}<p><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+  </div>
+</article>

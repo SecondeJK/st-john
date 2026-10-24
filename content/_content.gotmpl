@@ -1,0 +1,50 @@
+{{- /*
+  Every page on the site is generated here from CMS content (see partials/cms/data.html).
+  There are deliberately no Markdown files under content/: edit pages in the CMS,
+  or edit data/fixtures/site.json for local test data.
+*/ -}}
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+
+{{- /* A page with children (e.g. about → about/staff) must be a section. */ -}}
+{{- $paths := slice -}}
+{{- range $cms.pages }}{{ $paths = $paths | append .path }}{{ end -}}
+
+{{- range $cms.pages -}}
+  {{- $path := .path -}}
+  {{- $kind := "page" -}}
+  {{- range $paths -}}
+    {{- if hasPrefix . (printf "%s/" $path) }}{{ $kind = "section" }}{{ end -}}
+  {{- end -}}
+  {{- if eq $path "blog" }}{{ $kind = "section" }}{{ end -}}
+
+  {{- $page := dict
+    "kind" $kind
+    "path" $path
+    "title" .title
+    "weight" (.weight | default 0)
+    "content" (dict "mediaType" "text/markdown" "value" (.body | default ""))
+    "params" (dict
+      "summary" .summary
+      "heroImage" .heroImage
+      "gallery" .gallery
+    )
+  -}}
+  {{- with .layout }}{{ $page = merge $page (dict "layout" .) }}{{ end -}}
+  {{- $.AddPage $page -}}
+{{- end -}}
+
+{{- range $cms.posts -}}
+  {{- $.AddPage (dict
+    "kind" "page"
+    "path" (printf "blog/%s" .slug)
+    "title" .title
+    "dates" (dict "date" (time.AsTime .publishedAt))
+    "content" (dict "mediaType" "text/markdown" "value" (.body | default ""))
+    "params" (dict
+      "tags" .tags
+      "author" .author
+      "excerpt" .excerpt
+      "media" .media
+    )
+  ) -}}
+{{- end -}}

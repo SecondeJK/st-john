@@ -1,0 +1,7 @@
+{{- with .Pages }}
+<div class="container card-grid">
+  {{- range . }}
+  {{- partial "card.html" (dict "title" .Title "text" .Params.summary "link" .RelPermalink "image" .Params.heroImage) }}
+  {{- end }}
+</div>
+{{- end }}

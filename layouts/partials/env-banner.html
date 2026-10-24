@@ -1,0 +1,5 @@
+{{- if site.Params.envBanner }}
+<div class="env-banner" role="note">
+  {{ title hugo.Environment }} build · content: {{ site.Params.cms.source }} · events: {{ site.Params.calendar.source }}
+</div>
+{{- end }}

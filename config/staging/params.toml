@@ -1,0 +1,8 @@
+envBanner = true
+noindex = true
+
+[cms]
+  source = "sanity"
+
+[calendar]
+  source = "google"

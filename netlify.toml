@@ -1,0 +1,21 @@
+# Set HUGO_BASEURL, HUGO_SANITY_*, HUGO_GCAL_* in Netlify > Site configuration > Environment variables,
+# scoped per deploy context (production vs deploy previews / branch deploys).
+[build]
+  publish = "public"
+  command = "scripts/hugo.sh production --gc --minify"
+
+[build.environment]
+  HUGO_VERSION = "0.134.1"
+  TZ = "Europe/London"
+
+[context.deploy-preview]
+  command = "HUGO_BASEURL=$DEPLOY_PRIME_URL scripts/hugo.sh staging --gc --minify"
+
+[context.branch-deploy]
+  command = "HUGO_BASEURL=$DEPLOY_PRIME_URL scripts/hugo.sh staging --gc --minify"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

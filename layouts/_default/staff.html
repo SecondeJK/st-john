@@ -1,0 +1,10 @@
+{{ define "main" }}
+{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- partial "page-hero.html" . }}
+<div class="section">
+  <div class="container narrow prose">{{ .Content }}</div>
+  <div class="container people-grid">
+    {{- range $cms.staff }}{{ partial "person.html" . }}{{ end }}
+  </div>
+</div>
+{{ end }}

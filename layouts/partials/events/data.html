@@ -1,0 +1,81 @@
+{{- /*
+  Returns upcoming events, sorted by start, each as:
+    { title, start, end (time.Time), allDay, location, description, link, startUnix }
+
+  params.calendar.source = "fixtures" → data/fixtures/events.yaml, dated relative to the build
+  params.calendar.source = "google"   → Google Calendar API v3 (public calendar + API key)
+
+  Call with partialCached "events/data.html" "events".
+*/ -}}
+{{- $cfg := site.Params.calendar -}}
+{{- $tz := site.Params.timeZone -}}
+{{- $now := now -}}
+{{- $events := slice -}}
+
+{{- if eq $cfg.source "google" -}}
+  {{- $id := getenv "HUGO_GCAL_ID" -}}
+  {{- $key := getenv "HUGO_GCAL_API_KEY" -}}
+  {{- if or (not $id) (not $key) -}}
+    {{- errorf "events: source is \"google\" but HUGO_GCAL_ID or HUGO_GCAL_API_KEY is not set (environment %q)" hugo.Environment -}}
+  {{- end -}}
+  {{- $from := $now.UTC.Format "2006-01-02T00:00:00Z" -}}
+  {{- $to := ($now.AddDate 0 0 (int $cfg.daysAhead)).UTC.Format "2006-01-02T00:00:00Z" -}}
+  {{- $url := printf "https://www.googleapis.com/calendar/v3/calendars/%s/events?singleEvents=true&orderBy=startTime&maxResults=250&timeMin=%s&timeMax=%s"
+      (urlquery $id) (urlquery $from) (urlquery $to) -}}
+  {{- /* Key goes in a header so it never appears in build logs. */ -}}
+  {{- with resources.GetRemote $url (dict "headers" (dict "X-Goog-Api-Key" $key)) -}}
+    {{- with .Err -}}
+      {{- errorf "events: Google Calendar request failed: %s" . -}}
+    {{- else -}}
+      {{- range (. | transform.Unmarshal).items -}}
+        {{- $allDay := not .start.dateTime -}}
+        {{- $start := time.AsTime (.start.dateTime | default .start.date) $tz -}}
+        {{- $end := time.AsTime (.end.dateTime | default .end.date) $tz -}}
+        {{- $events = $events | append (dict
+          "title" (.summary | default "Event")
+          "start" $start "end" $end "allDay" $allDay "startUnix" $start.Unix
+          "location" .location
+          "description" (.description | default "" | plainify | htmlUnescape)
+          "link" .htmlLink
+        ) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- errorf "events: no response from Google Calendar (check HUGO_GCAL_ID)" -}}
+  {{- end -}}
+
+{{- else -}}
+  {{- $fx := site.Data.fixtures.events -}}
+  {{- $today := time.AsTime ($now.Format "2006-01-02") $tz -}}
+  {{- $weekdays := dict "Sunday" 0 "Monday" 1 "Tuesday" 2 "Wednesday" 3 "Thursday" 4 "Friday" 5 "Saturday" 6 -}}
+  {{- $todayNum := index $weekdays ($today.Format "Monday") -}}
+
+  {{- $items := slice -}}
+  {{- range $fx.weekly -}}
+    {{- $first := mod (add (sub (index $weekdays .weekday) $todayNum) 7) 7 -}}
+    {{- $e := . -}}
+    {{- range seq 0 (sub .weeks 1) -}}
+      {{- $items = $items | append (merge $e (dict "days" (add $first (mul . 7)))) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $items = $items | append $fx.oneoff -}}
+
+  {{- range $items -}}
+    {{- $date := ($today.AddDate 0 0 (int .days)).Format "2006-01-02" -}}
+    {{- $start := time.AsTime (printf "%sT%s:00" $date .time) $tz -}}
+    {{- $end := $start.Add (time.ParseDuration (printf "%dm" (int .minutes))) -}}
+    {{- $events = $events | append (dict
+      "title" .title
+      "start" $start "end" $end "allDay" false "startUnix" $start.Unix
+      "location" .location
+      "description" (.description | default "")
+      "link" ""
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $upcoming := slice -}}
+{{- range sort $events "startUnix" -}}
+  {{- if .end.After $now }}{{ $upcoming = $upcoming | append . }}{{ end -}}
+{{- end -}}
+{{- return $upcoming -}}

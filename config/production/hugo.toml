@@ -1,0 +1,3 @@
+# baseURL comes from HUGO_BASEURL (set per environment on the hosting platform).
+[minify]
+  minifyOutput = true
