@@ -547,7 +547,6 @@ staff:
     featured: true
 
 # "link" is internal (starts with /) or a page on A Church Near You.
-# The external URLs below are search links to confirm before launch.
 churches:
   - name: St John the Baptist
     place: Halesowen
@@ -557,16 +556,20 @@ churches:
   - name: St Peter's
     place: Cradley
     summary: Find service times and events on A Church Near You.
-    link: https://www.achurchnearyou.com/search/?text=St+Peter+Cradley
+    link: https://www.achurchnearyou.com/church/18744/
+    image: images/st-peters-cradley.jpg
   - name: St Peter's
     place: Lapal
     summary: Find service times and events on A Church Near You.
-    link: https://www.achurchnearyou.com/search/?text=St+Peter+Lapal
+    link: https://www.achurchnearyou.com/church/18757/
+    image: images/st-peters-lapal.jpeg
   - name: St Margaret of Antioch
     place: Hasbury
     summary: Find service times and events on A Church Near You.
-    link: https://www.achurchnearyou.com/search/?text=St+Margaret+Hasbury
+    link: https://www.achurchnearyou.com/church/18756/
+    image: images/st-margarets.jpg
   - name: St Kenelm's
     place: Romsley
     summary: Find service times and events on A Church Near You.
-    link: https://www.achurchnearyou.com/search/?text=St+Kenelm+Romsley
+    link: https://www.achurchnearyou.com/church/18761/
+    image: images/st-kenelms.webp
