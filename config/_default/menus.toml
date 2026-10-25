@@ -33,6 +33,10 @@
   pageRef = "/safeguarding"
   weight = 50
 [[main]]
+  name = "Accessibility"
+  pageRef = "/accessibility"
+  weight = 55
+[[main]]
   name = "Traidpoint Shop"
   pageRef = "/traidpoint"
   weight = 60

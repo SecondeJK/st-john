@@ -14,16 +14,7 @@
       <a class="button button--small" href="{{ "/whats-on/" | relURL }}">Full calendar</a>
     </aside>
   </div>
-  {{- with .Params.gallery }}
-  <div class="container gallery">
-    {{- range . }}
-    <figure>
-      {{- partial "img.html" (dict "src" .src "alt" .alt "w" 600 "h" 600 "sizes" "(min-width: 900px) 25vw, 50vw") }}
-      {{- with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
-    </figure>
-    {{- end }}
-  </div>
-  {{- end }}
+  {{- partial "gallery.html" . }}
 </div>
 {{- partial "location.html" $cms.settings }}
 {{ end }}

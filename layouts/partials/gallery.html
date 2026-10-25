@@ -1,0 +1,23 @@
+{{- /*
+  CMS image gallery: square thumbnails linking to a larger version.
+  site.js upgrades the links to a lightbox; without JavaScript they open the image.
+  Context: a page (uses .Params.gallery).
+*/ -}}
+{{- with .Params.gallery }}
+<div class="container gallery" data-gallery>
+  {{- range . }}
+  {{- $full := .src -}}
+  {{- if hasPrefix .src "http" -}}
+    {{- if strings.Contains .src "cdn.sanity.io" }}{{ $full = printf "%s%sw=1600&h=1600&fit=max&auto=format" .src (cond (strings.Contains .src "?") "&" "?") }}{{ end -}}
+  {{- else -}}
+    {{- with resources.Get .src }}{{ $full = (.Fit "1600x1600 webp q80").RelPermalink }}{{ end -}}
+  {{- end }}
+  <figure>
+    <a class="gallery__link" href="{{ $full }}" data-caption="{{ .caption | default .alt }}">
+      {{- partial "img.html" (dict "src" .src "alt" .alt "w" 600 "h" 600 "sizes" "(min-width: 900px) 25vw, 50vw") -}}
+    </a>
+    {{- with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{- end }}
+</div>
+{{- end }}

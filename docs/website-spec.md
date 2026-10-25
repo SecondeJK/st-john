@@ -37,10 +37,15 @@ Blog
 Safeguarding
 (placeholder page)
 
+Accessibility
+(info in assets/reference_documents/accessibility.docx, gallery view of images in assets/images/
+accessibility-x.jpg)
+
 Traidpoint Shop
+(info in assets/reference_documents/traidpoint-info.docx)
 
 Flower Ladies' Guild
-(placeholder page)
+(info in the assets/reference_documents/flower-guild.pdf, gallery view of images in assets/images/flower-guild-x.jpg)
 
 Guiding Lights
 (placeholder page about SEN parents support)

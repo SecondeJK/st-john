@@ -216,7 +216,60 @@ function initCalendar() {
   }
 }
 
+function initGallery() {
+  const galleries = document.querySelectorAll("[data-gallery]");
+  if (!galleries.length || typeof HTMLDialogElement !== "function") return;
+
+  const dialog = document.createElement("dialog");
+  dialog.className = "lightbox";
+  dialog.setAttribute("aria-label", "Image viewer");
+  dialog.innerHTML = `<figure class="lightbox__figure"><img class="lightbox__img" alt=""><figcaption class="lightbox__caption"></figcaption></figure>
+    <button type="button" class="lightbox__btn lightbox__close" aria-label="Close">×</button>
+    <button type="button" class="lightbox__btn lightbox__prev" aria-label="Previous image">‹</button>
+    <button type="button" class="lightbox__btn lightbox__next" aria-label="Next image">›</button>
+    <p class="lightbox__count" aria-live="polite"></p>`;
+  document.body.append(dialog);
+  const img = dialog.querySelector(".lightbox__img");
+  const caption = dialog.querySelector(".lightbox__caption");
+  const count = dialog.querySelector(".lightbox__count");
+
+  let links = [];
+  let index = 0;
+  const show = (i) => {
+    index = (i + links.length) % links.length;
+    const link = links[index];
+    img.src = link.href;
+    img.alt = link.querySelector("img")?.alt || "";
+    caption.textContent = link.dataset.caption || "";
+    count.textContent = `Image ${index + 1} of ${links.length}`;
+    dialog.classList.toggle("lightbox--single", links.length < 2);
+  };
+
+  galleries.forEach((g) => {
+    const own = [...g.querySelectorAll(".gallery__link")];
+    own.forEach((link, i) =>
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        links = own;
+        show(i);
+        dialog.showModal();
+      })
+    );
+  });
+
+  dialog.querySelector(".lightbox__close").addEventListener("click", () => dialog.close());
+  dialog.querySelector(".lightbox__prev").addEventListener("click", () => show(index - 1));
+  dialog.querySelector(".lightbox__next").addEventListener("click", () => show(index + 1));
+  dialog.addEventListener("click", (e) => e.target === dialog && dialog.close());
+  dialog.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") show(index - 1);
+    if (e.key === "ArrowRight") show(index + 1);
+  });
+  dialog.addEventListener("close", () => img.removeAttribute("src"));
+}
+
 initNav();
 initCarousel();
 initBlogFilters();
 initCalendar();
+initGallery();

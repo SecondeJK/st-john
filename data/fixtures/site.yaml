@@ -162,13 +162,15 @@ pages:
         caption: The Norman nave
     body: |
       The church is in the centre of Halesowen, a short walk from the bus station and the
-      Cornbow shopping centre. It is open for services and when the Traidpoint Shop is
-      open, and at other times by arrangement.
+      Cornbow shopping centre. It is open for services and when the
+      [Traidpoint café](/traidpoint/) is open (Wednesday, Friday and Saturday, 10:30am to
+      12:30pm), and at other times by arrangement.
 
       ## Accessibility
 
-      There is step-free access by the south porch, and a hearing loop. Please ask a
-      sidesperson if you need any help.
+      There are ramps with handrails at the entrance and into the café area, accessible
+      toilets with baby change, and sensory bags at the welcome desk. Please ask a sidesperson
+      if you need any help. See our [accessibility page](/accessibility/) for full details.
 
   - path: whats-on
     title: What's On
@@ -199,26 +201,216 @@ pages:
       The Church of England's national safeguarding guidance is at
       [churchofengland.org/safeguarding](https://www.churchofengland.org/safeguarding).
 
+  - path: accessibility
+    title: Accessibility
+    weight: 55
+    summary: Making St John's welcoming and easy to visit for everyone.
+    heroImage: images/accessibility-6.jpg
+    gallery:
+      - src: images/accessibility-6.jpg
+        alt: The wide main entrance doors open onto a level threshold with a non-slip mat
+        caption: Our wide entrance
+      - src: images/accessibility-3.jpg
+        alt: A wooden ramp with a handrail and non-slip strips leading into the church
+        caption: One of our two new ramps, with handrails
+      - src: images/accessibility-4.jpg
+        alt: The accessible toilet cubicle with a baby change station and grab rail
+        caption: Accessible toilet with baby change
+      - src: images/accessibility-1.jpg
+        alt: An open Bible with pink, purple and blue coloured overlay sheets laid across the pages
+        caption: Coloured overlays from our dyslexia friendly Bibles
+      - src: images/accessibility-2.jpg
+        alt: Good News Bible books of Psalms, Matthew, Genesis, John and Mark in a box
+        caption: Books of the Bible in smaller, easier to read volumes
+      - src: images/accessibility-5.jpg
+        alt: The Lord's Prayer printed with a symbol above each word
+        caption: Symbol-supported prayers
+    body: |
+      We want everyone to feel at home at St John's. Here is what to expect when you visit,
+      and the help that is available. If there is anything we have missed, please
+      [let us know](#help-us-and-feedback).
+
+      ## Getting here and getting in
+
+      ### Parking
+
+      There is a small amount of parking in the church grounds for anyone who struggles with
+      mobility. The nearest car park is the large council pay and display car park on Church
+      Road, opposite the church. You can also get 3 hours' free parking at Asda, a short walk
+      from the church.
+
+      ### Ramps and doors
+
+      Two new ramps with handrails have recently been fitted: one at the entrance and one into
+      the café area at the rear of the church. We also have a wide door for entering and
+      leaving if you prefer. Please ask one of the team if you need to use it.
+
+      ## Inside church
+
+      ### Toilets
+
+      Our brand new toilets are next to the Traidpoint Shop at the rear of the pews. There are
+      three cubicles, and one has disabled access and a baby change station.
+
+      ### Wheelchairs and pushchairs
+
+      There are spaces in the pews for wheelchairs and pushchairs. For a more relaxed option
+      there is also space at the tables at the rear of church.
+
+      ### Bibles, hymn books and service sheets
+
+      As well as Bibles for adults, we have a lovely selection of children's Bibles in the
+      children's corner and dyslexia friendly Bibles at the rear of church. Ask any of the
+      team and they will point you in the right direction.
+
+      Our dyslexia friendly Bibles use a dyslexia friendly font and spacing and come with a
+      set of coloured overlays. They have helped a number of our church members. We also have
+      individual books of the Bible in this format, which are smaller and easier to read.
+
+      We have large print Bibles and hymn books, and large print service sheets are coming
+      soon. QR codes on the notice boards link to a range of online Bibles that may work
+      better for you.
+
+      ### Sound and hearing
+
+      A new sound system with a hearing loop is due to be installed this year, which will give
+      better access to services across the church.
+
+      ## Sensory needs and neurodiversity
+
+      Sensory bags for all ages hang on the pillar by the welcome desk, next to the hymn books.
+      Each one has a range of fidget toys and a pair of ear defenders to block out background
+      noise. Please take one whenever you need it and return it when you have finished.
+
+      Everyone who comes with sensory needs is welcome. You are free to get up and walk around
+      during a service, use ear defenders, or do anything else that makes church easier for
+      you. We are open to suggestions on how to make church more accessible for people who are
+      neurodivergent, so please talk to the leadership team if you need more help or guidance.
+
+      Parents and carers of children with special educational needs may also like
+      [Guiding Lights](/guiding-lights/), our friendly support group.
+
+      ## During services
+
+      Our services involve some sitting and standing, but this is always optional.
+
+      Everyone is welcome to take part in Holy Communion wherever it is offered, or to come up
+      for a blessing instead. If you are unable to walk up to the altar, our clergy will bring
+      communion to you in your pew.
+
+      ## Children
+
+      Children are welcome at St John's and valued just as much as adults. Our attractive, well
+      stocked children's area has activities during Sunday services, and children are
+      encouraged to take part, such as carrying (battery) candles in the processions at the
+      start and end of the service.
+
+      Children don't have to sit still in a pew for the whole service, and are welcome to move
+      around. There are beanbags in the children's area and at the rear of church, and you can
+      move them where you need them. We just ask that you supervise the children you bring.
+
+      ## Café and shop
+
+      The [Traidpoint café and shop](/traidpoint/) is open on Wednesday, Friday and Saturday
+      mornings, 10:30am to 12:30pm. We serve a range of Fairtrade drinks and biscuits for a
+      small charge. Everyone is welcome, and our clergy and lay team can usually offer
+      pastoral support. Just ask.
+
+      ## Help us and feedback
+
+      There is still a lot we can do to become more accessible. If you can see something we
+      are missing, please talk to us or [contact the parish office](/about/contact/) and we will
+      do our best to help.
+
   - path: traidpoint
     title: Traidpoint Shop
     weight: 60
-    summary: Our church and community shop in the north cloister.
+    summary: Fairly traded goods and a friendly café at St John's.
     heroImage: images/st-john-nave.jpg
     body: |
-      Traidpoint has been in the church's north cloister since the 1980s. It started as a
-      church and community bookshop and now sells fairly traded goods, cards and gifts.
+      **Café open Wednesday, Friday and Saturday, 10:30am to 12:30pm**
+      {.callout}
 
-      *Opening times, volunteering information and stock details to follow.*
+      Traidpoint @ St John's is our fair trade shop and café. It was founded by Halesowen
+      Churches Together about 30 years ago, and you will find it at the rear of the church.
+
+      ## What's in the shop
+
+      The shop sells a range of fairly traded drinks, food, household goods and craft
+      products. You can also buy greeting cards, souvenirs and St John's guidebooks.
+
+      ## The café
+
+      The shop supplies the coffee, tea, sugar and biscuits for the café, which is open on
+      Wednesday, Friday and Saturday mornings from 10:30am to 12:30pm. Everyone is welcome.
+
+      Everything you spend in the shop and café supports both Fair Trade and St John's, so
+      please encourage your friends to visit.
+
+      ## Volunteer with us
+
+      You can support St John's and Traidpoint by helping in the shop or preparing
+      refreshments. Please pop in and ask while the café is open.
+
+      ## Who runs Traidpoint
+
+      Traidpoint is run by the Traidpoint Committee. Joan Marks is the Rota Secretary and has
+      been part of the St John's congregation for over 50 years, in various roles over that
+      time. Joy Howell is the Churches Together in Halesowen Co-ordinator and part of the
+      leadership team at Hasbury Community Church.
 
   - path: flower-guild
     title: Flower Ladies' Guild
     weight: 70
-    summary: The volunteers who keep St John's beautiful.
-    heroImage: images/st-john-altar.jpg
+    summary: Flowers for worship, celebration and remembrance throughout the year.
+    heroImage: images/flower-guild.jpg
+    gallery:
+      - src: images/flower-guild.jpg
+        alt: A large pedestal arrangement of pink roses, burgundy dahlias and gypsophila in front of the carved screen
+        caption: Roses and gypsophila on a pedestal
+      - src: images/flower-guild-1.jpg
+        alt: Red carnations and poppies arranged beside an icon of the Madonna and Child
+        caption: Remembrance
+      - src: images/flower-guild-2.jpg
+        alt: An arrangement of white lilies and white chrysanthemums against the stone wall
+        caption: White lilies and chrysanthemums
+      - src: images/flower-guild-3.jpg
+        alt: Yellow and white chrysanthemums with pink carnations on a pedestal stand
+        caption: Chrysanthemums and carnations
+      - src: images/flower-guild-4.jpg
+        alt: Yellow chrysanthemums and pink spray carnations with an in memory card at the base
+        caption: An arrangement in memory of a loved one
     body: |
-      *This page is a placeholder.* The Flower Ladies' Guild arranges flowers for Sunday
-      services, festivals, weddings and funerals. New members are always welcome, and no
-      experience is needed.
+      The Flower Ladies are **Helen, Gill, Val and Judith**. You will find them in church every
+      Friday morning from 10:30am.
+      {.callout}
+
+      ## What we do
+
+      We make sure there are flowers in church throughout the year, except during Lent and
+      Advent.
+
+      We make arrangements for anyone who would like to remember a loved one or celebrate a
+      special event such as a wedding or a christening. We can also make a pedestal
+      arrangement for a funeral. All we ask is a donation towards the cost of the flowers.
+
+      ## Easter lilies
+
+      At Easter you can buy a lily in memory of a loved one. The lilies are displayed in
+      arrangements around the church, and your loved one's name is shown on a board. Details
+      of how to buy a lily are in the pew notices during Lent, or you can speak to the Flower
+      Ladies.
+
+      ## National commemorations
+
+      We also make arrangements for national commemorations such as VE Day and Remembrance Day.
+      The Flower Guild pays for these flowers, but we are very grateful for any donations
+      towards them.
+
+      ## Arranging flowers
+
+      If you would like an arrangement made, or have any questions, come and see the Flower
+      Ladies in church on a Friday morning from 10:30am.
 
   - path: guiding-lights
     title: Guiding Lights
