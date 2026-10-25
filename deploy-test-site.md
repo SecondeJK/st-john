@@ -8,100 +8,107 @@ What the test site shows:
 
 - **Real site content** from `data/site.yaml`: every page, staff, churches, service times
 - **Test blog posts** from `data/fixtures/posts.yaml`
-- **Test events** from `data/fixtures/events.yaml`, dated from the day you build. They go stale,
-  so rebuild and redeploy to refresh them.
+- **Test events** from `data/fixtures/events.yaml`, dated from the day of each build
 - A striped **"Development build"** banner on every page, so nobody mistakes it for the live site
 - **Hidden from search engines**: every page is marked `noindex`
 
-## Why this is a manual deploy
+## How it works
 
-`netlify.toml` builds the **production** site, which needs real Sanity and Google Calendar
-credentials and stops if they're missing. Netlify's `netlify.toml` settings override anything set
-in its dashboard, so a site connected to the GitHub repository can't build with test data.
+`netlify.toml` builds the production site, which normally needs real Sanity and Google Calendar
+credentials and stops if they're missing:
 
-Instead, you build the test site on your own computer and upload the finished files with the
-Netlify command-line tool. Netlify doesn't run any build for this, so the production checks don't
-apply.
+```
+Missing required variables for production: HUGO_BASEURL HUGO_SANITY_PROJECT_ID ...
+```
+
+Setting the environment variable **`HUGO_TEST_SITE=true`** on the Netlify site switches the build
+to test mode. It builds from the test data, marks pages `noindex`, and uses the Netlify site's own
+address. Nothing else is needed.
+
+There are two ways to deploy. **Option A** is recommended: it updates itself on every push to GitHub.
 
 ---
 
-## One-off setup
+## Option A: Netlify connected to GitHub (recommended)
 
-### 1. Install and log in to the Netlify CLI
+### 1. Create the site
 
-Requires Node.js.
+1. At <https://app.netlify.com>, **Add new site → Import an existing project → GitHub**, and choose
+   `SecondeJK/st-john`.
+2. Leave the build settings as they are (they come from `netlify.toml`).
+3. Before deploying, open **Add environment variables** (on the same screen) and add:
 
-```sh
-npm install -g netlify-cli
-netlify login          # opens the browser to authorise
-```
+   | Key | Value |
+   |---|---|
+   | `HUGO_TEST_SITE` | `true` |
 
-### 2. Create the test site
+   Don't add any Sanity or Google variables.
+4. Click **Deploy**.
 
-From the project root:
+**If you've already created the site** and got the *"Missing required variables"* error:
+**Site configuration → Environment variables → Add a variable** → `HUGO_TEST_SITE` = `true`
+(all scopes and contexts). Then **Deploys → Trigger deploy → Deploy site**.
 
-```sh
-netlify sites:create --name st-john-test
-```
+### 2. Give it a clear name
 
-- Pick your Netlify team when asked.
-- If `st-john-test` is taken, choose another name. The site's address will be
-  `https://<name>.netlify.app/`.
-- This links the project folder to the new site (stored in a `.netlify/` folder, which the CLI adds
-  to `.gitignore`). If it says the folder isn't linked, run `netlify link --name <name>`.
-
-Keep this separate from the production site you'll create during go-live.
+**Site configuration → General → Site details → Change site name**, e.g. `st-john-test`. The
+address becomes `https://st-john-test.netlify.app/`. Then **Trigger deploy** again, so links and
+the sitemap use the new address.
 
 ### 3. Turn on the contact form
 
-In the Netlify dashboard, open the test site → **Forms** → **Enable form detection**. New sites
-have it off, and without it the contact form returns an error.
+**Forms → Enable form detection**, then **Trigger deploy** once more. New sites have form detection
+off, and without it the contact form returns an error.
 
 Submissions appear under **Forms** in the dashboard. Don't turn on email notifications for the test
 site unless you want test messages in the parish inbox.
 
+**Check:** the deploy log contains
+`HUGO_TEST_SITE=true: building a test site from fixtures (requested: production)` and ends
+successfully.
+
+### Updating it
+
+Every push to `main` redeploys the test site automatically. Branches and pull requests get their own
+preview addresses, also built from test data.
+
 ---
 
-## Deploy (each time)
+## Option B: Upload from your computer (Netlify CLI)
 
-Run these from the project root. Use your site's name if it isn't `st-john-test`.
+Use this if you don't want Netlify connected to GitHub.
 
-### 1. Build with test data
-
-```sh
-HUGO_BASEURL=https://st-john-test.netlify.app/ \
-HUGO_PARAMS_NOINDEX=true \
-scripts/hugo.sh development --gc --minify --cleanDestinationDir
-```
-
-- `development` uses the test blog posts and events, and shows the banner.
-- `HUGO_BASEURL` makes links, the sitemap and canonical tags point at the test site rather than
-  `localhost`.
-- `HUGO_PARAMS_NOINDEX=true` tells search engines not to index the pages.
-- `--cleanDestinationDir` empties `public/` first, so no files from earlier builds get uploaded.
-
-It should finish with a line like `Total in 180 ms` and no `ERROR` lines.
-
-### 2. Upload a preview (optional)
+### One-off setup
 
 ```sh
-netlify deploy --dir=public
+npm install -g netlify-cli
+netlify login                          # opens the browser to authorise
+netlify sites:create --name st-john-test
 ```
 
-This gives you a one-off preview address to check before replacing what's on the test site.
+- Pick your Netlify team when asked. If the name is taken, choose another.
+- This links the project folder to the site (stored in `.netlify/`, which the CLI adds to
+  `.gitignore`). If it says the folder isn't linked, run `netlify link --name st-john-test`.
+- In the Netlify dashboard: **Forms → Enable form detection**.
+- Also add `HUGO_TEST_SITE` = `true` under **Site configuration → Environment variables**. Some CLI
+  versions run the build from `netlify.toml` before uploading, and this makes that build succeed too.
 
-### 3. Publish to the test site
+### Each deploy
+
+From the project root:
 
 ```sh
-netlify deploy --dir=public --prod
+HUGO_TEST_SITE=true HUGO_BASEURL=https://st-john-test.netlify.app/ \
+  scripts/hugo.sh production --gc --minify --cleanDestinationDir
+
+netlify deploy --dir=public --prod --no-build
 ```
 
-"Production" here just means the main address of the **test** site,
-`https://st-john-test.netlify.app/`. It doesn't touch the real site.
-
-> If the CLI starts running the build command from `netlify.toml` and fails with
-> *"Missing required variables"*, add `--no-build` to the deploy command. The site is already built
-> in `public/`.
+- The first command builds the test site into `public/` (`--cleanDestinationDir` removes files from
+  earlier builds).
+- The second uploads it. "Production" means the main address of the **test** site; it doesn't touch
+  the real one. Leave out `--prod` to get a one-off preview address first.
+- If your CLI version doesn't recognise `--no-build`, leave it out.
 
 ---
 
@@ -115,22 +122,25 @@ netlify deploy --dir=public --prod
 - [ ] The Blog page shows the test posts, and the tag filters work.
 - [ ] Sending the contact form shows a success page, and the message appears under **Forms** in Netlify.
 
-## Updating the test site
+## Keeping the test events current
 
-Make your changes, check them locally with `make dev`, then repeat the two deploy commands:
-build, then `netlify deploy --dir=public --prod`.
+Test events are dated from the day of the build, so they run out after a few weeks. With
+**Option A**, any push redeploys; otherwise use **Deploys → Trigger deploy**. With **Option B**,
+run the two deploy commands again.
 
-Rebuild at least every few weeks if people are using the test site, or the test events run out.
+## Turning the test site into the live site (optional)
+
+You can reuse the same Netlify site for launch: delete `HUGO_TEST_SITE`, add the real variables
+from [go-live-steps.md](go-live-steps.md) phase 5, and redeploy. Or keep the test site separate and
+create a new site for production, which leaves you a place to try changes safely.
 
 ## Taking it down
 
 Netlify dashboard → test site → **Site configuration → General → Danger zone → Delete this site**.
-Then delete the `.netlify/` folder in the project, so the CLI no longer points at it.
+If you used Option B, also delete the `.netlify/` folder in the project.
 
 ## Limitations
 
-- **Manual only:** pushing to GitHub doesn't update the test site. Automatic test deploys would
-  need a small change to `netlify.toml`.
 - **Not password-protected:** anyone with the link can view it. It is hidden from search engines,
   but don't share the link publicly. (Netlify's password protection needs a paid plan.)
 - **Test content:** the blog posts and events are made up. The phone number and email in

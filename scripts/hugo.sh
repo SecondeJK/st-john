@@ -36,6 +36,17 @@ load_env() {
 load_env ".env.$env"
 load_env ".env"
 
+# HUGO_TEST_SITE=true builds a test site from fixtures whatever environment was asked for,
+# so Netlify can host one without Sanity or Google credentials. Netlify sets URL.
+if [ "${HUGO_TEST_SITE:-}" = "true" ]; then
+  echo "HUGO_TEST_SITE=true: building a test site from fixtures (requested: $env)" >&2
+  env=development
+  export HUGO_PARAMS_NOINDEX=true
+  if [ -z "${HUGO_BASEURL:-}" ] && [ -n "${URL:-}" ]; then
+    export HUGO_BASEURL="$URL/"
+  fi
+fi
+
 if [ "$env" != "development" ]; then
   missing=()
   for var in HUGO_BASEURL HUGO_SANITY_PROJECT_ID HUGO_SANITY_DATASET HUGO_GCAL_ID HUGO_GCAL_API_KEY; do

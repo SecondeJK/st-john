@@ -45,6 +45,7 @@ Copy `.env.example` to `.env.development` / `.env.staging` / `.env.production`. 
 | `HUGO_SANITY_TOKEN`      | Optional read token, only if the dataset is private               |
 | `HUGO_GCAL_ID`           | Public Google Calendar ID                                         |
 | `HUGO_GCAL_API_KEY`      | Google API key, restricted to the Calendar API                    |
+| `HUGO_TEST_SITE`         | `true` builds a test site from fixtures in any environment (see [deploy-test-site.md](deploy-test-site.md)) |
 
 Any Hugo param can be overridden from the environment, e.g. `HUGO_PARAMS_BLOG_SOURCE=sanity` in `.env.development` to preview live blog posts locally.
 
