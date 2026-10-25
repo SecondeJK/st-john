@@ -52,7 +52,7 @@ Guiding Lights
 
 ### Specific Page Requirements
 
-Landing Page 
+### Landing Page 
 carosel of three images
 "Welcome to St John the Baptist Church
 Serving Halesowen for over 1000 years" in text in the carosel
@@ -62,6 +62,14 @@ Serving Halesowen for over 1000 years" in text in the carosel
 2. link to blog
 3. link to about us page
 
-About Us
+### About Us
 Fetch some information from the wikipedia article, conclude with mission, SEN page links, vicar and leadership information and links. Location information, contact us.
 
+### Staff And Leadership
+
+Cards for each team member, plus their accompanying image in assets/images
+* Revd Hazel Charlton, Vicar & Team Leader
+* Revd Sarah Tranter
+* Revd Chris Henson
+* Revd Rachel Homer
+* Mthr Victoria Barlow
