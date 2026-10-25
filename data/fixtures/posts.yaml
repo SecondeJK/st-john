@@ -1,0 +1,100 @@
+# TEMPORARY TEST BLOG POSTS for local development only.
+# Staging and production read blog posts from Sanity (see studio/).
+# Images are paths under assets/; in Sanity they are CDN URLs. Templates handle both.
+
+posts:
+  - slug: harvest-festival-thank-you
+    title: Thank you for a wonderful Harvest
+    publishedAt: "2026-10-05T12:00:00+01:00"
+    author: Parish Office
+    excerpt: Your harvest gifts filled the font and the chancel steps, and have gone to the Halesowen food bank.
+    tags: [News, Community, Worship]
+    media:
+      - type: image
+        src: images/st-john-altar.jpg
+        alt: The altar decorated for harvest
+        caption: The sanctuary on Harvest Sunday
+    body: |
+      Thank you to everyone who brought gifts for our Harvest Festival. Tins, packets and
+      fresh produce filled the chancel steps, and everything has now gone to the local food
+      bank.
+
+      Special thanks to the Flower Ladies' Guild for the beautiful arrangements.
+
+  - slug: choir-evensong-autumn
+    title: Choral Evensong returns this autumn
+    publishedAt: "2026-09-21T09:00:00+01:00"
+    author: Director of Music
+    excerpt: Our choir is restarting monthly Choral Evensong, and new singers are welcome.
+    tags: [Music, Choir, Worship]
+    media:
+      - type: image
+        src: images/st-john-choir.jpeg
+        alt: Choir stalls at St John's
+        caption: The choir stalls
+    body: |
+      From October the choir will sing Choral Evensong on the last Sunday of each month at
+      6pm. If you would like to sing with us, come along to a Thursday rehearsal. We would
+      especially love to hear from tenors and basses.
+
+  - slug: flower-festival-preview
+    title: A first look at our Flower Festival
+    publishedAt: "2026-09-02T10:00:00+01:00"
+    author: Flower Ladies' Guild
+    excerpt: A short video preview of the arrangements being prepared for this year's festival.
+    tags: [Community, Flower Guild]
+    media:
+      - type: video
+        src: https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4
+        poster: images/st-john-nave.jpg
+        alt: Video of a flower opening
+        caption: "Test video (CC0, from MDN)"
+    body: |
+      The Flower Ladies' Guild has been busy getting ready for this year's festival. Here is
+      a sneak preview. The full festival will fill the nave and cloisters.
+
+  - slug: norman-font-heritage
+    title: "Heritage corner: the Norman font"
+    publishedAt: "2026-08-14T10:00:00+01:00"
+    author: Heritage Team
+    excerpt: Our font is one of the oldest things in the church. Here is a closer look.
+    tags: [Heritage]
+    media:
+      - type: image
+        src: images/st-john-font.jpeg
+        alt: The Norman font
+        caption: The Norman font
+      - type: image
+        src: images/st-john-nave.jpg
+        alt: The Norman nave
+        caption: The nave, from the same period
+    body: |
+      Generations of Halesowen families have been baptised at our Norman font. Like the
+      nave arches, it dates from the early twelfth century and is among the oldest parts of
+      the building.
+
+  - slug: bell-ringers-wanted
+    title: Bell ringers wanted
+    publishedAt: "2026-07-30T10:00:00+01:00"
+    author: Tower Captain
+    excerpt: Learn to ring on our ring of eight. No experience needed.
+    tags: [Bells, Community]
+    media:
+      - type: image
+        src: images/st-john-tower.jpg
+        alt: The church tower
+        caption: Our tower, finished in 1440
+    body: |
+      Our tower has rung over Halesowen for centuries, and we would love more people to
+      learn. Practice night is Tuesday at 7:30pm. Just come to the tower door.
+
+  - slug: welcome-new-website
+    title: Welcome to our new website
+    publishedAt: "2026-07-01T10:00:00+01:00"
+    author: Parish Office
+    excerpt: A new home online for St John's, with events, news and more.
+    tags: [News]
+    media: []
+    body: |
+      Welcome to our new website! You'll find service times, a calendar of events and news
+      from across the parish. Let us know what you think.

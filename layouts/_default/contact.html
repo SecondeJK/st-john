@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $data := site.Data.site -}}
 {{- partial "page-hero.html" . }}
 <div class="section">
   <div class="container two-col">
@@ -26,14 +26,14 @@
     </div>
     <aside class="contact-card">
       <h2>Parish office</h2>
-      <address>{{ delimit $cms.settings.address "<br>" | safeHTML }}</address>
+      <address>{{ delimit $data.settings.address "<br>" | safeHTML }}</address>
       <p>
-        {{- with $cms.settings.phone }}Phone: {{ . }}<br>{{ end }}
-        {{- with $cms.settings.email }}Email: <a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+        {{- with $data.settings.phone }}Phone: {{ . }}<br>{{ end }}
+        {{- with $data.settings.email }}Email: <a href="mailto:{{ . }}">{{ . }}</a>{{ end }}
       </p>
       <div class="map map--small">
         <iframe title="Map showing the church" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q={{ $cms.settings.mapQuery | urlquery }}&output=embed"></iframe>
+          src="https://www.google.com/maps?q={{ $data.settings.mapQuery | urlquery }}&output=embed"></iframe>
       </div>
     </aside>
   </div>

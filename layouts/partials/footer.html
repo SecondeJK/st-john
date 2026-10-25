@@ -1,5 +1,5 @@
-{{- $cms := partialCached "cms/data.html" "cms" -}}
-{{- $s := $cms.settings -}}
+{{- $data := site.Data.site -}}
+{{- $s := $data.settings -}}
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>

@@ -1,4 +1,4 @@
-{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $data := site.Data.site -}}
 {{- $current := . -}}
 <header class="site-header">
   <div class="container masthead">
@@ -26,7 +26,7 @@
         <a href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
         {{- if eq .Identifier "our-churches" }}
         <ul class="subnav">
-          {{- range $cms.churches }}
+          {{- range $data.churches }}
           <li><a href="{{ .link }}"{{ if not (hasPrefix .link "/") }} rel="noopener"{{ end }}>{{ .name }}, {{ .place }}</a></li>
           {{- end }}
         </ul>

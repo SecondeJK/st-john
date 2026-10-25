@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $data := site.Data.site -}}
 {{- partial "page-hero.html" . }}
 <div class="section">
   <div class="container narrow prose">
@@ -11,7 +11,7 @@
   <div class="container">
     <h2 id="leadership">Our vicar and leadership</h2>
     <div class="people-grid">
-      {{- range where $cms.staff "featured" true }}
+      {{- range where $data.staff "featured" true }}
       {{- partial "person.html" . }}
       {{- end }}
     </div>
@@ -19,5 +19,5 @@
   </div>
 </section>
 
-{{- partial "location.html" $cms.settings }}
+{{- partial "location.html" $data.settings }}
 {{ end }}

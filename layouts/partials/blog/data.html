@@ -1,0 +1,54 @@
+{{- /*
+  Returns blog posts, newest first, each as:
+    { slug, title, publishedAt, author, excerpt, body, tags, media }
+
+  params.blog.source = "fixtures" → data/fixtures/posts.yaml (temporary local test data)
+  params.blog.source = "sanity"   → Sanity HTTP query API (staging / production)
+
+  Both sources return the same shape, so templates never need to know which is in use.
+  Everything else on the site (settings, pages, staff, churches) is in data/site.yaml.
+  Call with partialCached "blog/data.html" "blog".
+*/ -}}
+{{- $cfg := site.Params.blog -}}
+{{- $posts := slice -}}
+
+{{- if eq $cfg.source "sanity" -}}
+  {{- $project := getenv "HUGO_SANITY_PROJECT_ID" -}}
+  {{- $dataset := getenv "HUGO_SANITY_DATASET" | default "production" -}}
+  {{- $token := getenv "HUGO_SANITY_TOKEN" -}}
+  {{- if not $project -}}
+    {{- errorf "blog: source is \"sanity\" but HUGO_SANITY_PROJECT_ID is not set (environment %q)" hugo.Environment -}}
+  {{- end -}}
+
+  {{- $query := `*[_type == "post"] | order(publishedAt desc){
+      "slug": slug.current, title, publishedAt, author, excerpt, body,
+      "tags": tags[]->title,
+      "media": media[]{
+        "type": select(_type == "image" => "image", _type == "videoFile" => "video", _type == "youtube" => "youtube"),
+        "src": coalesce(asset->url, file.asset->url),
+        "poster": poster.asset->url,
+        "id": videoId, alt, caption
+      }
+    }` -}}
+
+  {{- $host := cond (ne $token "") "api.sanity.io" "apicdn.sanity.io" -}}
+  {{- $url := printf "https://%s.%s/v%s/data/query/%s?perspective=published&query=%s" $project $host $cfg.apiVersion $dataset (urlquery $query) -}}
+  {{- $opts := dict -}}
+  {{- with $token -}}
+    {{- $opts = dict "headers" (dict "Authorization" (printf "Bearer %s" .)) -}}
+  {{- end -}}
+
+  {{- with resources.GetRemote $url $opts -}}
+    {{- with .Err -}}
+      {{- errorf "blog: Sanity request failed: %s" . -}}
+    {{- else -}}
+      {{- $posts = (. | transform.Unmarshal).result -}}
+    {{- end -}}
+  {{- else -}}
+    {{- errorf "blog: no response from Sanity (%s); check HUGO_SANITY_PROJECT_ID and HUGO_SANITY_DATASET" $host -}}
+  {{- end -}}
+{{- else -}}
+  {{- $posts = site.Data.fixtures.posts.posts -}}
+{{- end -}}
+
+{{- return ($posts | default slice) -}}

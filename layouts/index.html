@@ -1,6 +1,6 @@
 {{ define "main" }}
-{{- $cms := partialCached "cms/data.html" "cms" -}}
-{{- $home := $cms.home -}}
+{{- $data := site.Data.site -}}
+{{- $home := $data.home -}}
 <section class="carousel" aria-roledescription="carousel" aria-label="Photos of St John's">
   <div class="carousel__track">
     {{- range $i, $s := $home.slides }}

@@ -1,15 +1,15 @@
 {{- /*
-  Every page on the site is generated here from CMS content (see partials/cms/data.html).
-  There are deliberately no Markdown files under content/: edit pages in the CMS,
-  or edit data/fixtures/site.json for local test data.
+  Every page on the site is generated here. There are deliberately no Markdown files
+  under content/: edit pages in data/site.yaml, and blog posts in the CMS
+  (data/fixtures/posts.yaml for local test data; see partials/blog/data.html).
 */ -}}
-{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $data := site.Data.site -}}
 
 {{- /* A page with children (e.g. about → about/staff) must be a section. */ -}}
 {{- $paths := slice -}}
-{{- range $cms.pages }}{{ $paths = $paths | append .path }}{{ end -}}
+{{- range $data.pages }}{{ $paths = $paths | append .path }}{{ end -}}
 
-{{- range $cms.pages -}}
+{{- range $data.pages -}}
   {{- $path := .path -}}
   {{- $kind := "page" -}}
   {{- range $paths -}}
@@ -33,7 +33,7 @@
   {{- $.AddPage $page -}}
 {{- end -}}
 
-{{- range $cms.posts -}}
+{{- range partialCached "blog/data.html" "blog" -}}
   {{- $.AddPage (dict
     "kind" "page"
     "path" (printf "blog/%s" .slug)

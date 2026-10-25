@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $data := site.Data.site -}}
 {{- partial "page-hero.html" . }}
 <div class="section">
   <div class="container two-col two-col--wide">
@@ -7,7 +7,7 @@
     <aside class="contact-card">
       <h2>Service times</h2>
       <ul class="plain-list">
-        {{- range $cms.settings.serviceTimes }}
+        {{- range $data.settings.serviceTimes }}
         <li><strong>{{ .day }} {{ .time }}</strong><br>{{ .name }}</li>
         {{- end }}
       </ul>
@@ -16,5 +16,5 @@
   </div>
   {{- partial "gallery.html" . }}
 </div>
-{{- partial "location.html" $cms.settings }}
+{{- partial "location.html" $data.settings }}
 {{ end }}

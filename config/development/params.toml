@@ -1,8 +1,8 @@
-# Local development always uses temporary test data from data/fixtures.
-# To preview real CMS content locally, set HUGO_PARAMS_CMS_SOURCE=sanity in .env.development.
+# Local development uses temporary test blog posts and events from data/fixtures.
+# To preview real blog posts locally, set HUGO_PARAMS_BLOG_SOURCE=sanity in .env.development.
 envBanner = true
 
-[cms]
+[blog]
   source = "fixtures"
 
 [calendar]

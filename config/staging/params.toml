@@ -1,7 +1,7 @@
 envBanner = true
 noindex = true
 
-[cms]
+[blog]
   source = "sanity"
 
 [calendar]

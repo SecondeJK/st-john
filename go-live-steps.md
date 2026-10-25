@@ -1,17 +1,16 @@
 # Go-live steps
 
-How to take the St John the Baptist site from local test data to a live site, with:
+How to take the St John the Baptist site live. Only two parts of the site rely on external
+services:
 
-- **Sanity** (hosted CMS) for every page, blog post, staff member, church and site setting
-- **Google Calendar** for the What's On page
-- **Netlify** for hosting, the contact form and builds
+- **Blog posts** come from **Sanity** (a hosted CMS)
+- **Events** on the What's On page come from **Google Calendar**
+
+Everything else (site settings, home page, every page, staff and leadership, churches, service
+times) is permanent content in `data/site.yaml` in this repository. **Netlify** hosts the site,
+handles the contact form, and rebuilds it.
 
 Work through the phases in order. Each one ends with a check, so you know it worked before moving on.
-
-> **Before you start:** locally, everything you see comes from `data/fixtures/site.yaml` and
-> `data/fixtures/events.yaml`. That is temporary test data. Staging and production never read it.
-> All real content has to be entered in Sanity (phase 4) and all real events in Google Calendar
-> (phase 2), or the live site will be empty.
 
 ## Accounts you will need
 
@@ -20,9 +19,9 @@ access survives changes of volunteers.
 
 | Service | Used for | Plan |
 |---|---|---|
-| GitHub | The code (`SecondeJK/st-john`) and the nightly rebuild | Free |
+| GitHub | The code and site content (`SecondeJK/st-john`), the nightly rebuild | Free |
 | Netlify | Hosting, builds, contact form | Free tier is enough to start |
-| Sanity | Content editing | Free tier is enough to start |
+| Sanity | Blog posts | Free tier is enough to start |
 | Google account | The public events calendar and the Calendar API key | Free |
 | Domain registrar | The church's domain name | Existing |
 
@@ -35,12 +34,42 @@ access survives changes of volunteers.
 
 ---
 
-## Phase 1: Set up Sanity (the CMS)
+## Phase 1: Finalise the site content (in the repository)
+
+All of this is in `data/site.yaml`. Edit it, check it with `make dev`, then commit and push.
+The local site already shows this content exactly as it will appear live.
+
+- [ ] **Contact details** (`settings`): real phone number (currently a test number), email
+      (currently `office@example.org`) and postal address.
+- [ ] **Facebook** (`settings.facebook`): the real page URL. It isn't shown anywhere at the moment
+      since the top banner was removed; ask if you want it added to the footer.
+- [ ] **Mission statement** (About Us page): approved by the PCC. It is currently marked as a draft.
+- [ ] **Safeguarding page**: the real policy, the Parish Safeguarding Officer's contact details and
+      the Diocese of Worcester safeguarding team's details.
+- [ ] **Guiding Lights page**: real content, or clearly marked as coming soon.
+- [ ] **About Us history**: adapted from Wikipedia (CC BY-SA 4.0). Keep the attribution line, and
+      check the facts with the parish.
+- [ ] **Permissions**: people named or pictured have agreed. This covers staff headshots, the
+      Traidpoint photo, and the Traidpoint committee members named on that page.
+
+Already done and in `data/site.yaml`:
+
+- Staff and leadership: Revd Hazel Charlton (Vicar & Team Leader), Revd Sarah Tranter,
+  Revd Chris Henson, Revd Rachel Homer and Mthr Victoria Barlow, with headshots
+- Service times: Sunday 9.30am Holy Communion (Eucharist), Wednesday 12.30pm Holy Communion (Spoken)
+- Our Churches: A Church Near You links and photos for all four other churches
+
+> **Making changes after launch:** edit `data/site.yaml` (or add images to `assets/images/`),
+> commit and push. Netlify rebuilds the live site automatically within a couple of minutes.
+
+---
+
+## Phase 2: Set up Sanity (the blog)
 
 1. Go to <https://www.sanity.io/manage> and sign in with the parish account.
 2. **Create a project** called "St John the Baptist, Halesowen".
    - Dataset name: `production`
-   - Visibility: **Public**. Published content is public on the website anyway, and drafts are
+   - Visibility: **Public**. Published posts are public on the website anyway, and drafts are
      never exposed. This means no read token is needed.
 3. Copy the **Project ID** from the project's dashboard.
 4. Set up the Studio (the editing app) on your machine:
@@ -54,7 +83,7 @@ access survives changes of volunteers.
    npm run dev          # opens http://localhost:3333
    ```
 
-5. Deploy the Studio so editors can use it from a browser without installing anything:
+5. Deploy the Studio so editors can write posts from a browser without installing anything:
 
    ```sh
    npm run deploy       # choose a hostname, e.g. st-john-halesowen
@@ -63,15 +92,17 @@ access survives changes of volunteers.
    It will be at `https://<hostname>.sanity.studio`. Bookmark it.
 6. Invite editors: sanity.io/manage → your project → **Members** → **Invite**, with the
    *Editor* role.
+7. In the Studio, create the **Tags** you want visitors to filter by (e.g. News, Music, Community,
+   Worship), then publish at least one real **Blog post** so the blog isn't empty at launch.
 
-**Check:** you can open the hosted Studio and see *Site settings*, *Home page*, *Pages*,
-*Blog posts*, *Tags*, *Staff and leadership* and *Our churches* in the left-hand list.
+**Check:** the hosted Studio shows just two lists, *Blog posts* and *Tags*, and your first post
+is published (not a draft).
 
 ---
 
-## Phase 2: Set up Google Calendar (events)
+## Phase 3: Set up Google Calendar (events)
 
-### 2a. The calendar
+### 3a. The calendar
 
 1. In Google Calendar (parish account), create a new calendar, e.g. "St John's events".
    Use a dedicated calendar, not anyone's personal one: everything in it will be public.
@@ -83,7 +114,7 @@ access survives changes of volunteers.
 3. Add the regular services and upcoming events. The site shows the next 180 days.
    Set each event's **location** and **description**; both appear on the What's On page.
 
-### 2b. The API key
+### 3b. The API key
 
 1. Go to <https://console.cloud.google.com/> (same parish account) and create a project,
    e.g. "st-john-website".
@@ -109,9 +140,9 @@ curl -s -H "X-Goog-Api-Key: <API key>" \
 
 ---
 
-## Phase 3: Try it locally against the real services
+## Phase 4: Try it locally against the real services
 
-Before involving Netlify, confirm the site builds with real data.
+Before involving Netlify, confirm the site builds with the real blog and calendar.
 
 1. Create `.env.staging` in the project root (it is git-ignored):
 
@@ -125,83 +156,9 @@ Before involving Netlify, confirm the site builds with real data.
 
 2. Run `scripts/hugo.sh staging server`.
 
-**Check:** the striped banner reads *"Staging build · content: sanity · events: google"*, and the
-What's On page lists your Google Calendar events. Pages will be mostly empty until phase 4.
-
----
-
-## Phase 4: Enter the content in Sanity
-
-This is the biggest job. Everything currently in `data/fixtures/site.yaml` needs re-creating in
-the Studio, with real details in place of placeholders.
-
-> **Shortcut:** there is no import script yet. A one-off script could convert
-> `data/fixtures/site.yaml` into a Sanity import file and upload the images, which would save
-> most of the typing below. Ask for one if you want it; otherwise enter content by hand.
-
-### 4a. Site settings and home page
-
-- [ ] **Site settings**: title, tagline, address lines, phone, email, Facebook URL, map search
-      text, and the service times:
-  - Sunday, 9.30am, Holy Communion (Eucharist)
-  - Wednesday, 12.30pm, Holy Communion (Spoken)
-- [ ] **Home page**: heading ("Welcome to St John the Baptist Church"), subheading, intro, the
-      three carousel images (with alt text) and the three link blocks.
-
-### 4b. Pages
-
-The menu links to these exact paths, so each **path** and **layout** must match. A missing or
-misspelt path leaves a broken menu item.
-
-| Page | Path | Layout |
-|---|---|---|
-| About Us | `about` | About us |
-| Staff and Leadership | `about/staff` | Staff list |
-| Contact Us | `about/contact` | Contact |
-| Our Churches | `our-churches` | Churches list |
-| St John the Baptist, Halesowen | `our-churches/st-johns` | Church |
-| What's On | `whats-on` | Events calendar |
-| Blog | `blog` | Standard |
-| Safeguarding | `safeguarding` | Standard |
-| Accessibility | `accessibility` | Standard |
-| Traidpoint Shop | `traidpoint` | Standard |
-| Flower Ladies' Guild | `flower-guild` | Standard |
-| Guiding Lights | `guiding-lights` | Standard |
-
-For each page, copy the title, summary, body (Markdown) and weight (sort order) from
-`data/fixtures/site.yaml`. Upload the hero image and gallery images from `assets/images/`, and fill
-in the **alt** text and captions (also in the fixture file).
-
-### 4c. Staff and leadership
-
-Add a person for each, with their headshot from `assets/images/`. Tick **featured** to show them on
-the About Us page, and use **order** to set the order (1 = first).
-
-| Name | Title | Photo |
-|---|---|---|
-| Revd Hazel Charlton | Vicar & Team Leader | `hazel.jpg` |
-| Revd Sarah Tranter | | `sarah.jpg` |
-| Revd Chris Henson | | `chris.jpg` |
-| Revd Rachel Homer | | `rachel.jpg` |
-| Mthr Victoria Barlow | | `victoria.jpg` |
-
-### 4d. Our churches
-
-| Name | Place | Link | Photo |
-|---|---|---|---|
-| St John the Baptist | Halesowen | `/our-churches/st-johns/` | `st-john-profile.jpeg` |
-| St Peter's | Cradley | <https://www.achurchnearyou.com/church/18744/> | `st-peters-cradley.jpg` |
-| St Peter's | Lapal | <https://www.achurchnearyou.com/church/18757/> | `st-peters-lapal.jpeg` |
-| St Margaret of Antioch | Hasbury | <https://www.achurchnearyou.com/church/18756/> | `st-margarets.jpg` |
-| St Kenelm's | Romsley | <https://www.achurchnearyou.com/church/18761/> | `st-kenelms.webp` |
-
-### 4e. Blog
-
-- [ ] Create the tags you want to filter by (e.g. News, Music, Community).
-- [ ] Publish at least one real post so the blog isn't empty at launch.
-
-**Check:** re-run `scripts/hugo.sh staging server`. Every menu item opens a page with content,
-staff photos and church photos appear, and there are no build warnings.
+**Check:** the striped banner reads *"Staging build · blog: sanity · events: google"*. The Blog
+page shows your real post(s), and What's On lists your Google Calendar events. All other pages
+look the same as in `make dev`.
 
 ---
 
@@ -209,6 +166,7 @@ staff photos and church photos appear, and there are no build warnings.
 
 1. At <https://app.netlify.com>, **Add new site → Import an existing project → GitHub** and choose
    `SecondeJK/st-john`. Netlify reads the build settings from `netlify.toml`, so leave them as they are.
+   Netlify now rebuilds the site on every push to `main`.
 2. **Site configuration → Environment variables**. Add these, marking the key as a secret:
 
    | Variable | Value | Contexts |
@@ -227,7 +185,7 @@ staff photos and church photos appear, and there are no build warnings.
 4. **Site configuration → Notifications → Emails and webhooks → Form submission notifications** →
    send contact-form messages to the parish office email.
 
-**Check:** the deploy succeeds and the `.netlify.app` address shows the real content with **no**
+**Check:** the deploy succeeds and the `.netlify.app` address shows the full site with **no**
 striped banner. If the build fails with *"Missing required variables"*, the log names the
 missing variables.
 
@@ -235,9 +193,10 @@ missing variables.
 
 ## Phase 6: Automatic rebuilds
 
-The site is static, so it only changes when it is rebuilt. Two triggers keep it current.
+The site is static, so it only changes when it is rebuilt. Changes to `data/site.yaml` rebuild on
+push (phase 5). The blog and the calendar each need a trigger of their own.
 
-### 6a. When content is published in Sanity
+### 6a. When a blog post is published in Sanity
 
 1. Netlify: **Site configuration → Build & deploy → Continuous deployment → Build hooks →
    Add build hook**, named "Sanity publish", branch `main`. Copy the URL.
@@ -264,8 +223,8 @@ Calendar changes made during the day appear the next morning. To show one sooner
 > GitHub pauses scheduled workflows after 60 days with no commits to the repository. If events
 > stop updating, check the Actions tab and re-enable the workflow.
 
-**Check:** publish a small edit in the Studio. A new deploy starts in Netlify within a few seconds,
-and the change is live within a couple of minutes.
+**Check:** publish a small edit to a blog post in the Studio. A new deploy starts in Netlify within
+a few seconds, and the change is live within a couple of minutes.
 
 ---
 
@@ -283,23 +242,7 @@ and page links don't point to `.netlify.app`.
 
 ---
 
-## Phase 8: Before announcing the site
-
-Content and permissions:
-
-- [ ] Replace placeholder phone, email and address (the fixture phone is a test number).
-- [ ] Mission statement approved by the PCC (currently marked as a draft).
-- [ ] Safeguarding page has the real policy, the Parish Safeguarding Officer's contact details
-      and the Diocese of Worcester team's details.
-- [ ] Guiding Lights page has real content, or is clearly marked as coming soon.
-- [ ] Permission from the people named or pictured: staff headshots, the Traidpoint photo, and the
-      Traidpoint committee members named on that page.
-- [ ] The About Us history keeps its Wikipedia attribution (CC BY-SA 4.0), and the facts have been
-      checked with the parish.
-- [ ] Facebook: the top banner link was removed. If you want a Facebook link, ask for it to be
-      added to the footer.
-
-Testing on the live domain:
+## Phase 8: Final checks on the live domain
 
 - [ ] Every menu item and dropdown link works, on a phone as well as a computer.
 - [ ] What's On shows the real events, and *Subscribe (iCal)* opens the calendar.
@@ -316,17 +259,18 @@ Testing on the live domain:
 | Problem | What to do |
 |---|---|
 | A bad deploy is live | Netlify → **Deploys** → choose the last good deploy → **Publish deploy**. |
+| A content change broke the build | The Netlify deploy log names the problem (often a YAML indentation mistake in `data/site.yaml`). The previous deploy stays live until a build succeeds. Fix and push, or revert the commit. |
 | Build fails: *"Missing required variables"* | Add the named variables in Netlify (phase 5) for that deploy context. |
-| Build fails: *"Sanity request failed"* | Check `HUGO_SANITY_PROJECT_ID` and dataset; if the dataset is private, add `HUGO_SANITY_TOKEN`. |
-| Build fails: *"Google Calendar request failed"* | Check the calendar is public, the Calendar API is enabled, and the key's API restriction includes it. |
-| A published edit doesn't show | Check Netlify **Deploys** for a new build. If there wasn't one, check the Sanity webhook's delivery log. If there was, wait a minute and trigger another deploy. |
+| Build fails: *"blog: Sanity request failed"* | Check `HUGO_SANITY_PROJECT_ID` and dataset; if the dataset is private, add `HUGO_SANITY_TOKEN`. |
+| Build fails: *"events: Google Calendar request failed"* | Check the calendar is public, the Calendar API is enabled, and the key's API restriction includes it. |
+| A published blog post doesn't show | Check Netlify **Deploys** for a new build. If there wasn't one, check the Sanity webhook's delivery log. If there was, wait a minute and trigger another deploy. |
 | Events are out of date | Check the GitHub **Actions** tab for the nightly run, or trigger a deploy by hand. |
-| A menu item is missing | A page with that exact path doesn't exist in Sanity, or isn't published (see 4b). |
 
 ## Reference
 
 - `README.md`: architecture, environments and all environment variables
+- `data/site.yaml`: all permanent site content
 - `.env.example`: template for local `.env.<environment>` files
 - `netlify.toml`: build commands per deploy context
 - `.github/workflows/rebuild.yml`: nightly rebuild
-- `studio/`: Sanity Studio schemas
+- `studio/`: Sanity Studio (blog) schemas

@@ -1,7 +1,7 @@
-{{- $cms := partialCached "cms/data.html" "cms" -}}
+{{- $data := site.Data.site -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ if .IsHome }}{{ $cms.settings.title }}{{ else }}{{ .Title }} | {{ $cms.settings.title }}{{ end }}</title>
+<title>{{ if .IsHome }}{{ $data.settings.title }}{{ else }}{{ .Title }} | {{ $data.settings.title }}{{ end }}</title>
 <meta name="description" content="{{ .Params.summary | default .Params.excerpt | default site.Params.description }}">
 {{- if site.Params.noindex }}
 <meta name="robots" content="noindex, nofollow">
