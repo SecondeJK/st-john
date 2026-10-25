@@ -1,19 +1,11 @@
 {{- $cms := partialCached "cms/data.html" "cms" -}}
 {{- $current := . -}}
 <header class="site-header">
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <span>{{ $cms.settings.tagline }}</span>
-      {{- with $cms.settings.facebook }}
-      <a href="{{ . }}" class="topbar__social" rel="noopener">Facebook</a>
-      {{- end }}
-    </div>
-  </div>
   <div class="container masthead">
     <a href="{{ "/" | relURL }}" class="brand">
-      {{- with resources.Get "images/cofe-logo-white.png" }}
-      {{- $logo := .Resize "360x webp" }}
-      <img src="{{ $logo.RelPermalink }}" width="{{ div $logo.Width 2 }}" height="{{ div $logo.Height 2 }}" alt="Church of England">
+      {{- with resources.Get "images/st-john-logo-monochrome.png" }}
+      {{- $logo := .Resize "x160 webp q85" }}
+      <img src="{{ $logo.RelPermalink }}" width="{{ div $logo.Width 2 }}" height="{{ div $logo.Height 2 }}" alt="">
       {{- end }}
       <span class="brand__name">
         <span class="brand__title">St John the Baptist</span>

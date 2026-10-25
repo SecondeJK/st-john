@@ -6,7 +6,7 @@ export const person = defineType({
   type: 'document',
   fields: [
     defineField({name: 'name', type: 'string', validation: (r) => r.required()}),
-    defineField({name: 'role', type: 'string', validation: (r) => r.required()}),
+    defineField({name: 'role', type: 'string', description: 'Title, if any (e.g. Vicar & Team Leader)'}),
     defineField({name: 'bio', type: 'text', rows: 3}),
     defineField({name: 'email', type: 'string'}),
     defineField({name: 'photo', type: 'image', options: {hotspot: true}}),

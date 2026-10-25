@@ -16,14 +16,11 @@ settings:
   mapQuery: St John the Baptist Church, Halesowen
   serviceTimes:
     - day: Sunday
-      time: "8:00am"
-      name: Holy Communion (said)
-    - day: Sunday
-      time: "10:30am"
-      name: Parish Eucharist with choir
+      time: "9.30am"
+      name: Holy Communion (Eucharist)
     - day: Wednesday
-      time: "10:00am"
-      name: Midweek Communion
+      time: "12.30pm"
+      name: Holy Communion (Spoken)
 
 home:
   heading: Welcome to St John the Baptist Church
@@ -327,6 +324,16 @@ pages:
     weight: 60
     summary: Fairly traded goods and a friendly café at St John's.
     heroImage: images/st-john-nave.jpg
+    gallery:
+      - src: images/traidpoint-3.jpg
+        alt: A customer buys an item at the Traidpoint counter, beneath the stained glass windows at the rear of the church
+        caption: Serving a customer at the Traidpoint counter
+      - src: images/traidpoint-1.jpg
+        alt: Wooden shelves stocked with eco-friendly toilet rolls, hand wash and cleaning products, beside racks of greeting cards
+        caption: Household goods and greeting cards
+      - src: images/traidpoint-2.jpg
+        alt: Wooden shelves of clear tubs holding fairly traded chocolate and sweets, with mugs and small bowls on display
+        caption: Chocolate, sweets and gifts
     body: |
       **Café open Wednesday, Friday and Saturday, 10:30am to 12:30pm**
       {.callout}
@@ -522,29 +529,22 @@ posts:
       from across the parish. Let us know what you think.
 
 staff:
-  - name: Name to be confirmed
-    role: Team Rector
-    bio: Leads the Halas Team Ministry and is vicar of St John's.
-    email: rector@example.org
+  - name: Revd Hazel Charlton
+    role: Vicar & Team Leader
+    photo: images/hazel.jpg
     featured: true
-  - name: Name to be confirmed
-    role: Associate Priest
-    bio: Shares in leading worship and pastoral care across the team.
+  - name: Revd Sarah Tranter
+    photo: images/sarah.jpg
     featured: true
-  - name: Name to be confirmed
-    role: Churchwarden
+  - name: Revd Chris Henson
+    photo: images/chris.jpg
     featured: true
-  - name: Name to be confirmed
-    role: Churchwarden
+  - name: Revd Rachel Homer
+    photo: images/rachel.jpg
     featured: true
-  - name: Name to be confirmed
-    role: Director of Music
-  - name: Name to be confirmed
-    role: Parish Safeguarding Officer
-    email: safeguarding@example.org
-  - name: Name to be confirmed
-    role: Parish Administrator
-    email: office@example.org
+  - name: Mthr Victoria Barlow
+    photo: images/victoria.jpg
+    featured: true
 
 # "link" is internal (starts with /) or a page on A Church Near You.
 # The external URLs below are search links to confirm before launch.

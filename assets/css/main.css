@@ -108,13 +108,10 @@ address { font-style: normal; margin-bottom: 1em; }
 
 /* Header */
 .site-header { background: var(--purple-800); color: var(--white); position: relative; z-index: 20; }
-.topbar { background: var(--purple-900); font-size: 0.85rem; color: #d9d0e6; }
-.topbar__inner { display: flex; justify-content: space-between; gap: 1rem; padding-block: 0.35rem; }
-.topbar a { color: var(--gold-500); text-decoration: none; }
 .masthead { display: flex; align-items: center; justify-content: space-between; padding-block: 1rem; }
 .brand { display: flex; align-items: center; gap: 1rem; color: var(--white); text-decoration: none; }
 .brand:hover { color: var(--white); }
-.brand img { width: 150px; height: auto; }
+.brand img { width: auto; height: 80px; }
 .brand__name { display: flex; flex-direction: column; border-left: 1px solid rgb(255 255 255 / 0.35); padding-left: 1rem; }
 .brand__title { font-family: var(--font-serif); font-size: 1.7rem; font-weight: 700; line-height: 1; }
 .brand__place { font-size: 0.8rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-500); margin-top: 0.3rem; }
@@ -166,9 +163,8 @@ address { font-style: normal; margin-bottom: 1em; }
   .subnav a:hover { background: none; color: var(--gold-500); }
 }
 @media (max-width: 560px) {
-  .brand img { width: 104px; }
+  .brand img { height: 60px; }
   .brand__title { font-size: 1.3rem; }
-  .topbar__inner span { display: none; }
 }
 
 /* Carousel */
@@ -267,10 +263,10 @@ address { font-style: normal; margin-bottom: 1em; }
 
 /* People */
 .people-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); margin-bottom: 2rem; }
-.person { display: flex; gap: 1rem; align-items: flex-start; background: var(--cream); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--line); }
+.person { display: flex; gap: 1rem; align-items: center; background: var(--cream); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--line); }
 .section:not(.section--tint) .person { background: var(--white); }
 .person__photo {
-  flex: 0 0 72px; height: 72px; border-radius: 50%; overflow: hidden;
+  flex: 0 0 96px; height: 96px; border-radius: 50%; overflow: hidden;
   background: var(--purple-700); color: var(--gold-500);
   display: grid; place-items: center; font-family: var(--font-serif); font-size: 2rem; font-weight: 700;
 }

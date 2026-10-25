@@ -16,38 +16,38 @@ Developement and deployment services with .env files, live env vars for connecti
 ### Site Taxonomy
 - all pages need to be editable in the CMS.
 
-Landing Page
+#### Landing Page
 
-About Us (this is a page in itself)
+#### About Us (this is a page in itself)
 * Staff and Leadership
 * Contact Us
 
-Our Churches
+#### Our Churches
 * St John the Baptist, Halesowen (link to St John's Page)
-* St Peter's Cradley (link to a church near you)
-* St Peter's Lapal (link to a Church near you)
-* St Margaret of Antioch, Hasbury (link to a church near you)
-& St Kenelm's, Romsley (link to a church near you)
+* St Peter's Cradley (link [to a church near you](https://www.achurchnearyou.com/church/18744/))
+* St Peter's Lapal (link [to a Church near you](https://www.achurchnearyou.com/church/18757/))
+* St Margaret of Antioch, Hasbury (link [to a church near you](https://www.achurchnearyou.com/church/18756/))
+* St Kenelm's, Romsley (link [to a church near you](https://www.achurchnearyou.com/church/18761/))
 
-What's On
+#### What's On
 Events system (more details below)
 
-Blog
+#### Blog 
 
-Safeguarding
+#### Safeguarding
 (placeholder page)
 
-Accessibility
+#### Accessibility
 (info in assets/reference_documents/accessibility.docx, gallery view of images in assets/images/
 accessibility-x.jpg)
 
-Traidpoint Shop
+#### Traidpoint Shop
 (info in assets/reference_documents/traidpoint-info.docx)
 
-Flower Ladies' Guild
+### Flower Ladies' Guild
 (info in the assets/reference_documents/flower-guild.pdf, gallery view of images in assets/images/flower-guild-x.jpg)
 
-Guiding Lights
+#### Guiding Lights
 (placeholder page about SEN parents support)
 
 ### Specific Page Requirements
